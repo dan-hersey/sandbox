@@ -39,12 +39,11 @@ const useCounter = (end, duration = 2000, inView) => {
 };
 
 // Logo Component - uses official SVG
-const Logo = ({ className = "h-8", dark = false }) => (
+const Logo = ({ className = "h-8" }) => (
   <img
     src="/sandbox/logo.svg"
     alt="Logo"
     className={className}
-    style={dark ? {} : { filter: 'brightness(0) saturate(100%) invert(24%) sepia(95%) saturate(4997%) hue-rotate(230deg) brightness(102%) contrast(103%)' }}
   />
 );
 
