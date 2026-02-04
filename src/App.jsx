@@ -38,41 +38,15 @@ const useCounter = (end, duration = 2000, inView) => {
   return count;
 };
 
-// Brightstar Logo SVG Component - matches official branding
-const BrightstarLogo = ({ className = "h-10", dark = false }) => {
-  const color = dark ? "#1a1a1a" : "#2D4BFF";
-  return (
-    <svg className={className} viewBox="0 0 140 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Circular border with 8-point star inside */}
-      <g transform="translate(70, 12)">
-        {/* Outer circle */}
-        <circle cx="0" cy="0" r="10" fill="none" stroke={color} strokeWidth="1.5" />
-        {/* 8-point star - all points radiating from center */}
-        {/* Cardinal points (longer) */}
-        <line x1="0" y1="-7" x2="0" y2="7" stroke={color} strokeWidth="1.5" />
-        <line x1="-7" y1="0" x2="7" y2="0" stroke={color} strokeWidth="1.5" />
-        {/* Diagonal points (shorter) */}
-        <line x1="-5" y1="-5" x2="5" y2="5" stroke={color} strokeWidth="1.5" />
-        <line x1="5" y1="-5" x2="-5" y2="5" stroke={color} strokeWidth="1.5" />
-        {/* Center circle */}
-        <circle cx="0" cy="0" r="1.5" fill={color} />
-      </g>
-      {/* BRIGHTSTAR text */}
-      <text
-        x="70"
-        y="38"
-        textAnchor="middle"
-        fontFamily="system-ui, -apple-system, 'Segoe UI', sans-serif"
-        fontSize="11"
-        fontWeight="600"
-        letterSpacing="2.5"
-        fill={color}
-      >
-        BRIGHTSTAR
-      </text>
-    </svg>
-  );
-};
+// Brightstar Logo Component - uses official SVG from website
+const BrightstarLogo = ({ className = "h-8", dark = false }) => (
+  <img
+    src="/sandbox/brightstar-logo.svg"
+    alt="Brightstar"
+    className={className}
+    style={dark ? {} : { filter: 'brightness(0) saturate(100%) invert(24%) sepia(95%) saturate(4997%) hue-rotate(230deg) brightness(102%) contrast(103%)' }}
+  />
+);
 
 // Circle decoration component with bounce animation
 const CircleDecor = ({ size, className, style, delay = 0 }) => {
