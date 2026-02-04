@@ -38,11 +38,11 @@ const useCounter = (end, duration = 2000, inView) => {
   return count;
 };
 
-// Brightstar Logo Component - uses official SVG from website
-const BrightstarLogo = ({ className = "h-8", dark = false }) => (
+// Logo Component - uses official SVG
+const Logo = ({ className = "h-8", dark = false }) => (
   <img
-    src="/sandbox/brightstar-logo.svg"
-    alt="Brightstar"
+    src="/sandbox/logo.svg"
+    alt="Logo"
     className={className}
     style={dark ? {} : { filter: 'brightness(0) saturate(100%) invert(24%) sepia(95%) saturate(4997%) hue-rotate(230deg) brightness(102%) contrast(103%)' }}
   />
@@ -102,7 +102,7 @@ const Navigation = ({ activeSection }) => {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <BrightstarLogo className="h-8" />
+          <Logo className="h-8" />
           <div className="hidden lg:flex gap-1">
             {sections.map((section) => (
               <button
@@ -866,7 +866,7 @@ const ConclusionSection = () => {
 
       <div className="relative z-10 border-t border-gray-900/10 py-8">
         <div className="max-w-7xl mx-auto px-8 flex flex-wrap items-center justify-between gap-4">
-          <BrightstarLogo className="h-8" />
+          <Logo className="h-8" />
 
           <div className="flex items-center gap-4 text-gray-700 text-sm">
             <span>Powered by</span>

@@ -1,7 +1,7 @@
 {
-  "name": "brightstar-trends-2026",
+  "name": "project-trends",
   "version": "1.0.0",
-  "description": "Interactive Brightstar Lottery 2026 Trend Report",
+  "description": "Interactive 2026 Trend Report",
   "type": "module",
   "scripts": {
     "dev": "vite",
