@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeff Gordon Ramsey's | Upscale Motorsport Steakhouse</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   JEFF GORDON RAMSEY'S — MOTORSPORT STEAKHOUSE
+   DuPont Rainbow/Flames Palette
+   ═══════════════════════════════════════════ */
+
+:root {
+  --dupont-red: #E31937;
+  --dupont-orange: #FF6B2B;
+  --dupont-yellow: #FFD700;
+  --dupont-blue: #1E3A8A;
+  --dupont-dark: #0A0A0F;
+  --dupont-darker: #050508;
+  --cream: #FAF5E8;
+  --gold: #C9A84C;
+  --gold-light: #E8D48B;
+  --smoke: #1A1A2E;
+  --asphalt: #12121F;
+  --tire-black: #0D0D15;
+  --text-primary: #FAF5E8;
+  --text-secondary: #A9A295;
+  --checkered-size: 20px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dupont-red) var(--tire-black);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--dupont-dark);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ── Checkered Flag Pattern ── */
+.checkered-divider {
+  width: 100%;
+  height: 24px;
+  background:
+    repeating-conic-gradient(#fff 0% 25%, #111 0% 50%) 0 0 / var(--checkered-size) var(--checkered-size);
+  opacity: 0.7;
+}
+
+.checkered-divider.thin {
+  height: 12px;
+  opacity: 0.4;
+}
+
+/* ── Navigation ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: linear-gradient(180deg, rgba(5,5,8,0.97) 0%, rgba(5,5,8,0.85) 100%);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--dupont-red);
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2rem;
+}
+
+.nav-logo {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--dupont-red), var(--dupont-orange), var(--dupont-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-logo span {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 5px;
+  -webkit-text-fill-color: var(--text-secondary);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--dupont-red), var(--dupont-orange));
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--cream); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--dupont-red), var(--dupont-orange)) !important;
+  -webkit-text-fill-color: white !important;
+  color: white !important;
+  padding: 0.5rem 1.2rem;
+  border-radius: 2px;
+  font-weight: 600 !important;
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ── Hero Section ── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(227,25,55,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(255,107,43,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(30,58,138,0.12) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(5,5,8,0.5) 0%, rgba(10,10,15,0.7) 100%),
+    url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80') center/cover no-repeat;
+  filter: brightness(0.3);
+}
+
+.hero-flames {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background:
+    radial-gradient(ellipse at 30% 100%, rgba(227,25,55,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 100%, rgba(255,107,43,0.06) 0%, transparent 60%);
+}
+
+.hero-number {
+  position: absolute;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 35vw;
+  color: rgba(255,255,255,0.015);
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 2rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--dupont-yellow);
+  margin-bottom: 2rem;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid rgba(255,215,0,0.2);
+  background: rgba(255,215,0,0.05);
+}
+
+.hero-badge::before,
+.hero-badge::after {
+  content: '★';
+  font-size: 0.6rem;
+}
+
+.hero h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 8vw, 7rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.hero h1 .jeff { color: var(--cream); }
+.hero h1 .gordon {
+  background: linear-gradient(135deg, var(--dupont-red), var(--dupont-orange), var(--dupont-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero h1 .ramsey { color: var(--cream); }
+
+.hero-tagline {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  font-weight: 400;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1rem 2.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--dupont-red), var(--dupont-orange));
+  color: white;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(227,25,55,0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-outline:hover {
+  border-color: var(--dupont-yellow);
+  color: var(--dupont-yellow);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.hero-scroll .arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 1px solid var(--text-secondary);
+  border-bottom: 1px solid var(--text-secondary);
+  transform: rotate(45deg);
+}
+
+/* ── Section Styles ── */
+section {
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-number {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  color: var(--dupont-red);
+  margin-bottom: 0.5rem;
+}
+
+.section-header h2 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 .accent {
+  background: linear-gradient(135deg, var(--dupont-red), var(--dupont-orange), var(--dupont-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-header p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── About Section ── */
+#about {
+  background: var(--asphalt);
+}
+
+.about-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-image {
+  position: relative;
+  aspect-ratio: 3/4;
+  background:
+    linear-gradient(135deg, rgba(227,25,55,0.15), rgba(30,58,138,0.1)),
+    url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80') center/cover no-repeat;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.about-image-text {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 8rem;
+  opacity: 0.15;
+  line-height: 1;
+  text-align: center;
+}
+
+.about-image .corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-color: var(--dupont-red);
+  border-style: solid;
+}
+.about-image .corner.tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+.about-image .corner.br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+.about-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.about-text h3 em { color: var(--dupont-orange); }
+
+.about-text p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.stat-item .stat-number {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  background: linear-gradient(135deg, var(--dupont-yellow), var(--dupont-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-item .stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+}
+
+/* ── Menu Section ── */
+#menu {
+  background: var(--dupont-dark);
+}
+
+.menu-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.menu-tab {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.menu-tab.active {
+  color: var(--cream);
+}
+
+.menu-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--dupont-red), var(--dupont-orange));
+}
+
+.menu-tab:hover { color: var(--cream); }
+
+.menu-section { display: none; }
+.menu-section.active { display: block; }
+
+.menu-category {
+  margin-bottom: 3rem;
+}
+
+.menu-category-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dupont-orange);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255,107,43,0.2);
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.menu-item:last-child { border-bottom: none; }
+
+.menu-item-info { flex: 1; padding-right: 2rem; }
+
+.menu-item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+}
+
+.menu-item-name .badge {
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--dupont-red), var(--dupont-orange));
+  color: white;
+  padding: 2px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.menu-item-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.menu-item-price {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--dupont-yellow);
+  white-space: nowrap;
+}
+
+/* ── Cocktails Section ── */
+#cocktails {
+  background: var(--asphalt);
+}
+
+.cocktail-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.cocktail-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.cocktail-card:hover {
+  border-color: rgba(227,25,55,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(227,25,55,0.1);
+}
+
+.cocktail-card .cocktail-number {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  opacity: 0.06;
+}
+
+.cocktail-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cocktail-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--cream), var(--dupont-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cocktail-card .cocktail-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--dupont-orange);
+  margin-bottom: 1rem;
+}
+
+.cocktail-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.cocktail-price {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  color: var(--dupont-yellow);
+  font-size: 1rem;
+}
+
+/* ── Gallery Section ── */
+#gallery {
+  background: var(--dupont-dark);
+  padding-bottom: 4rem;
+}
+
+.gallery-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 220px);
+  gap: 8px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--smoke), var(--asphalt));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+
+.gallery-item:hover { transform: scale(1.02); z-index: 2; }
+
+.gallery-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35);
+  transition: transform 0.6s, filter 0.6s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+  filter: brightness(0.5);
+}
+
+.gallery-item .gallery-label {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 1rem;
+  transition: color 0.3s;
+  position: relative;
+  z-index: 2;
+}
+
+.gallery-item:hover .gallery-label { color: var(--cream); }
+
+.gallery-item .gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(227,25,55,0.0),
+    rgba(255,107,43,0.0));
+  transition: all 0.4s;
+}
+
+.gallery-item:hover .gallery-overlay {
+  background: linear-gradient(135deg,
+    rgba(227,25,55,0.15),
+    rgba(255,107,43,0.1));
+}
+
+/* ── Reservations Section ── */
+#reservations {
+  background: var(--asphalt);
+}
+
+.reservation-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.reservation-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full { grid-column: 1 / -1; }
+
+.form-group label {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--cream);
+  padding: 0.9rem 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.3s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--dupont-red);
+}
+
+.form-group select option {
+  background: var(--smoke);
+  color: var(--cream);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-note {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.form-submit {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* ── Merch Section ── */
+#merch {
+  background: var(--dupont-dark);
+}
+
+.merch-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.merch-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.05);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.merch-card:hover {
+  border-color: rgba(255,215,0,0.2);
+  transform: translateY(-4px);
+}
+
+.merch-image {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--smoke), var(--asphalt));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.merch-emoji {
+  font-size: 3.5rem;
+}
+
+.merch-info {
+  padding: 1.5rem;
+}
+
+.merch-info h3 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.merch-info .merch-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.merch-info .merch-price {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  color: var(--dupont-yellow);
+  font-size: 1.1rem;
+}
+
+/* ── Contact & Footer ── */
+#contact {
+  background: var(--asphalt);
+  padding-bottom: 2rem;
+}
+
+.contact-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  text-align: center;
+}
+
+.contact-item h3 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dupont-orange);
+  margin-bottom: 1rem;
+}
+
+.contact-item p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.contact-item a {
+  color: var(--cream);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-item a:hover { color: var(--dupont-yellow); }
+
+footer {
+  background: var(--tire-black);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--dupont-red), var(--dupont-orange), var(--dupont-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-socials a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  transition: color 0.3s;
+}
+
+.footer-socials a:hover { color: var(--dupont-yellow); }
+
+.footer-copy {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.footer-copy .flames {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  font-style: italic;
+  color: rgba(255,107,43,0.3);
+}
+
+/* ── Racing Stripe Accents ── */
+.racing-stripe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--dupont-red), var(--dupont-orange), var(--dupont-yellow), var(--dupont-blue));
+}
+
+/* ── Responsive ── */
+@media (max-width: 968px) {
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .about-image { aspect-ratio: 16/9; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 180px); }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-toggle { display: block; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--tire-black);
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+    border-bottom: 2px solid var(--dupont-red);
+  }
+  .hero h1 { letter-spacing: 2px; }
+  .reservation-form { grid-template-columns: 1fr; }
+  .menu-tabs { flex-wrap: wrap; gap: 0; }
+  .menu-tab { font-size: 0.75rem; padding: 0.8rem 1rem; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 160px); }
+  .cocktail-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      Jeff Gordon Ramsey's
+      <span>Motorsport Steakhouse</span>
+    </div>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#cocktails">Pit Lane Bar</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#merch">Merch</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#reservations" class="nav-cta">Reserve</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-flames"></div>
+  <div class="hero-number">24</div>
+  <div class="hero-content">
+    <div class="hero-badge">Est. 2024 · Charlotte, NC</div>
+    <h1>
+      <span class="jeff">Jeff</span><br>
+      <span class="gordon">Gordon</span><br>
+      <span class="ramsey">Ramsey's</span>
+    </h1>
+    <p class="hero-tagline">Where four-time champions meet Michelin-starred flames.</p>
+    <div class="hero-buttons">
+      <a href="#reservations" class="btn btn-primary">Book a Table</a>
+      <a href="#menu" class="btn btn-outline">View Menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<div class="checkered-divider"></div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-number">— 01 —</div>
+    <h2>The <span class="accent">Origin Story</span></h2>
+    <p>Two legends. One impossible restaurant. Zero donkeys allowed.</p>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-image">
+      <div class="about-image-text">24</div>
+      <div class="corner tl"></div>
+      <div class="corner br"></div>
+    </div>
+    <div class="about-text">
+      <h3>What happens when a four-time NASCAR champion decides <em>he's also a bloody brilliant chef?</em></h3>
+      <p>Born from the audacious fever dream that racing and fine dining are essentially the same thing — precision, timing, fire, and knowing when to turn left — Jeff Gordon Ramsey's opened its doors in the heart of Charlotte, North Carolina in 2024.</p>
+      <p>Our kitchen operates like a pit crew: every second counts, every plate is engineered for perfection, and if your steak comes out wrong, someone <em>will</em> hear about it. Loudly.</p>
+      <p>The 12,000-square-foot space features authentic racing memorabilia, a show kitchen with a custom-built wood-fire grill modeled after a V8 engine, and leather booths designed from retired stock car seats. The wine cellar? It's in a decommissioned hauler. Obviously.</p>
+
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-number">93</div>
+          <div class="stat-label">Race Wins on the Wall</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Championship Titles</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Idiot Sandwiches Served</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="checkered-divider thin"></div>
+
+<!-- ═══════════ MENU ═══════════ -->
+<section id="menu">
+  <div class="section-header">
+    <div class="section-number">— 02 —</div>
+    <h2>The <span class="accent">Menu</span></h2>
+    <p>Fuel for champions. Every dish clocked to perfection.</p>
+  </div>
+
+  <div class="menu-container">
+    <div class="menu-tabs">
+      <button class="menu-tab active" onclick="showMenu('starters')">Starters</button>
+      <button class="menu-tab" onclick="showMenu('mains')">Mains</button>
+      <button class="menu-tab" onclick="showMenu('sides')">Sides & Pit Stops</button>
+      <button class="menu-tab" onclick="showMenu('desserts')">Victory Lap</button>
+    </div>
+
+    <!-- STARTERS -->
+    <div id="starters" class="menu-section active">
+      <div class="menu-category">
+        <div class="menu-category-title">Qualifying Round</div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Pit Stop Pork Belly Bites <span class="badge">Fan Favorite</span></div>
+            <div class="menu-item-desc">Slow-braised, then flash-seared. Bourbon-maple glaze, pickled mustard seeds, microgreens</div>
+          </div>
+          <div class="menu-item-price">$19</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Beef Tartare à la Daytona</div>
+            <div class="menu-item-desc">Hand-cut prime tenderloin, smoked egg yolk, capers, Dijon, house-made gaufrette crisps</div>
+          </div>
+          <div class="menu-item-price">$24</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Tuna Crudo, Turn Four</div>
+            <div class="menu-item-desc">Yellowfin tuna, yuzu, avocado mousse, crispy shallots, chili oil, sesame</div>
+          </div>
+          <div class="menu-item-price">$22</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Lobster Bisque Under Caution</div>
+            <div class="menu-item-desc">Cognac-flambéed Maine lobster, crème fraîche, chive oil, truffle crouton</div>
+          </div>
+          <div class="menu-item-price">$18</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Idiot Sandwich</div>
+            <div class="menu-item-desc">Two slices of toasted brioche around your ears — just kidding. Wagyu sliders, onion jam, gruyère</div>
+          </div>
+          <div class="menu-item-price">$21</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Burrata on Pole Position</div>
+            <div class="menu-item-desc">Creamy burrata, heirloom tomatoes, aged balsamic, basil oil, flaky sea salt</div>
+          </div>
+          <div class="menu-item-price">$17</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAINS -->
+    <div id="mains" class="menu-section">
+      <div class="menu-category">
+        <div class="menu-category-title">Main Event</div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Lap 500 Ribeye <span class="badge">Signature</span></div>
+            <div class="menu-item-desc">32oz bone-in prime ribeye, dry-aged 45 days. Roasted bone marrow butter, charred cipollini, red wine jus</div>
+          </div>
+          <div class="menu-item-price">$89</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Wellington Under the Hood</div>
+            <div class="menu-item-desc">Beef Wellington with wild mushroom duxelles, prosciutto, puff pastry — carved tableside like a champion</div>
+          </div>
+          <div class="menu-item-price">$72</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">DuPont Rack of Lamb</div>
+            <div class="menu-item-desc">Colorado lamb, herb-crusted, rainbow peppercorn sauce, roasted root vegetables, mint gremolata</div>
+          </div>
+          <div class="menu-item-price">$65</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Pan-Seared Branzino, Green Flag</div>
+            <div class="menu-item-desc">Mediterranean sea bass, saffron risotto, beurre blanc, crispy capers, lemon zest</div>
+          </div>
+          <div class="menu-item-price">$52</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Filet Mignon — It's RAW!</div>
+            <div class="menu-item-desc">Just kidding. 10oz center-cut tenderloin, cooked precisely to your specs. Truffle pomme purée, asparagus</div>
+          </div>
+          <div class="menu-item-price">$68</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">NASCAR Mac & Cheese Royale</div>
+            <div class="menu-item-desc">Lobster tail, four-cheese béchamel, black truffle, herbed breadcrumb crust. Indulgent. Unapologetic.</div>
+          </div>
+          <div class="menu-item-price">$42</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Vegan Chicane</div>
+            <div class="menu-item-desc">Roasted cauliflower steak, romesco, quinoa tabbouleh, crispy chickpeas, tahini drizzle</div>
+          </div>
+          <div class="menu-item-price">$34</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDES -->
+    <div id="sides" class="menu-section">
+      <div class="menu-category">
+        <div class="menu-category-title">Pit Stop Sides</div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Truffle Fries at 200 MPH</div>
+            <div class="menu-item-desc">Triple-cooked frites, parmesan, truffle oil, fresh herbs</div>
+          </div>
+          <div class="menu-item-price">$14</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Creamed Spinach on the Straightaway</div>
+            <div class="menu-item-desc">Baby spinach, nutmeg cream, crispy garlic chips</div>
+          </div>
+          <div class="menu-item-price">$12</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Grilled Broccolini, Pace Car</div>
+            <div class="menu-item-desc">Charred broccolini, chili flakes, lemon, toasted almonds</div>
+          </div>
+          <div class="menu-item-price">$13</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Loaded Potato — Full Tank</div>
+            <div class="menu-item-desc">Twice-baked, sour cream, chives, applewood bacon, aged cheddar</div>
+          </div>
+          <div class="menu-item-price">$15</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Charred Brussels, Drafting Style</div>
+            <div class="menu-item-desc">Crispy Brussels sprouts, honey-sriracha glaze, sesame, fried shallots</div>
+          </div>
+          <div class="menu-item-price">$13</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESSERTS -->
+    <div id="desserts" class="menu-section">
+      <div class="menu-category">
+        <div class="menu-category-title">Victory Lap Desserts</div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Sticky Toffee Burnout <span class="badge">Signature</span></div>
+            <div class="menu-item-desc">Warm date sponge, butterscotch sauce, vanilla bean ice cream — torched tableside with real drama</div>
+          </div>
+          <div class="menu-item-price">$16</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Checkered Flag Crème Brûlée</div>
+            <div class="menu-item-desc">Classic vanilla custard, caramelized sugar crust, black & white chocolate shards</div>
+          </div>
+          <div class="menu-item-price">$14</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Chocolate Lava Cake, Full Throttle</div>
+            <div class="menu-item-desc">Valrhona dark chocolate, molten center, espresso gelato, gold leaf</div>
+          </div>
+          <div class="menu-item-price">$17</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Cool-Down Lap</div>
+            <div class="menu-item-desc">Trio of housemade sorbets — passion fruit, blood orange, champagne. Light, refreshing, victorious.</div>
+          </div>
+          <div class="menu-item-price">$12</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Tiramisu à la Talladega</div>
+            <div class="menu-item-desc">Espresso-soaked ladyfingers, mascarpone, cocoa dust, amaretto cream</div>
+          </div>
+          <div class="menu-item-price">$15</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="checkered-divider thin"></div>
+
+<!-- ═══════════ COCKTAILS ═══════════ -->
+<section id="cocktails">
+  <div class="section-header">
+    <div class="section-number">— 03 —</div>
+    <h2>The <span class="accent">Pit Lane Bar</span></h2>
+    <p>Cheeky cocktails engineered for speed and served with attitude.</p>
+  </div>
+
+  <div class="cocktail-grid">
+    <div class="cocktail-card">
+      <div class="cocktail-number">01</div>
+      <div class="cocktail-icon">🔥</div>
+      <h3>The Donkey Kick</h3>
+      <div class="cocktail-sub">"Move your arse!"</div>
+      <p>Reposado tequila, ginger beer, fresh lime, habanero syrup, topped with a candied chili. Not for the faint-hearted.</p>
+      <div class="cocktail-price">$18</div>
+    </div>
+
+    <div class="cocktail-card">
+      <div class="cocktail-number">02</div>
+      <div class="cocktail-icon">🏁</div>
+      <h3>Rainbow Warrior</h3>
+      <div class="cocktail-sub">The Jeff Gordon #24 Special</div>
+      <p>Seven-layer pousse-café — crème de menthe, blue curaçao, grenadine, Galliano, violet liqueur, cream. A visual masterpiece.</p>
+      <div class="cocktail-price">$22</div>
+    </div>
+
+    <div class="cocktail-card">
+      <div class="cocktail-number">03</div>
+      <div class="cocktail-icon">🥃</div>
+      <h3>The Pit Stop Old Fashioned</h3>
+      <div class="cocktail-sub">Under 4 seconds. Usually.</div>
+      <p>Woodford Reserve bourbon, smoked demerara, Angostura, flamed orange peel. Quick to make, slow to forget.</p>
+      <div class="cocktail-price">$19</div>
+    </div>
+
+    <div class="cocktail-card">
+      <div class="cocktail-number">04</div>
+      <div class="cocktail-icon">🍸</div>
+      <h3>Hell's Kitchen Sink</h3>
+      <div class="cocktail-sub">Everything but your dignity</div>
+      <p>Hendrick's gin, elderflower, cucumber, basil, champagne float. Deceptively civilized. Dangerously drinkable.</p>
+      <div class="cocktail-price">$20</div>
+    </div>
+
+    <div class="cocktail-card">
+      <div class="cocktail-number">05</div>
+      <div class="cocktail-icon">🏆</div>
+      <h3>The Victory Milk</h3>
+      <div class="cocktail-sub">Inspired by Indy tradition</div>
+      <p>Rum horchata, vanilla vodka, white chocolate liqueur, cinnamon dust. Because winners drink milk — spiked milk.</p>
+      <div class="cocktail-price">$17</div>
+    </div>
+
+    <div class="cocktail-card">
+      <div class="cocktail-number">06</div>
+      <div class="cocktail-icon">💨</div>
+      <h3>Smoke & Mirrors Negroni</h3>
+      <div class="cocktail-sub">Served under a cloche of hickory smoke</div>
+      <p>Mezcal-washed Campari, sweet vermouth, barrel-aged gin. Unveiled tableside. Pure theatre.</p>
+      <div class="cocktail-price">$21</div>
+    </div>
+
+    <div class="cocktail-card">
+      <div class="cocktail-number">07</div>
+      <div class="cocktail-icon">🍾</div>
+      <h3>The Champagne Burnout</h3>
+      <div class="cocktail-sub">Pop. Pour. Celebrate.</div>
+      <p>Dom Pérignon (by the glass), St-Germain, muddled strawberry, edible gold. For when you've earned it.</p>
+      <div class="cocktail-price">$32</div>
+    </div>
+
+    <div class="cocktail-card">
+      <div class="cocktail-number">08</div>
+      <div class="cocktail-icon">🧊</div>
+      <h3>The Black Flag</h3>
+      <div class="cocktail-sub">You've been disqualified from sobriety</div>
+      <p>Activated charcoal, vodka, blackberry liqueur, lemon, lavender syrup. Jet black. Deeply mysterious.</p>
+      <div class="cocktail-price">$19</div>
+    </div>
+
+    <div class="cocktail-card">
+      <div class="cocktail-number">09</div>
+      <div class="cocktail-icon">🫒</div>
+      <h3>The Dirty Draft</h3>
+      <div class="cocktail-sub">Shaken harder than Turn 3</div>
+      <p>Grey Goose, extra dirty olive brine, vermouth mist, blue cheese-stuffed olives. For purists with edge.</p>
+      <div class="cocktail-price">$18</div>
+    </div>
+  </div>
+</section>
+
+<div class="checkered-divider thin"></div>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section id="gallery">
+  <div class="section-header">
+    <div class="section-number">— 04 —</div>
+    <h2>The <span class="accent">Paddock</span></h2>
+    <p>Step inside the most thrilling steakhouse on the East Coast.</p>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80') center/cover no-repeat">
+      <div class="gallery-overlay"></div>
+      <div class="gallery-label">The Main Dining Room<br><small style="opacity:0.5">Retired stock car leather booths & trophy wall</small></div>
+    </div>
+    <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80') center/cover no-repeat">
+      <div class="gallery-overlay"></div>
+      <div class="gallery-label">The V8 Show Kitchen</div>
+    </div>
+    <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=800&q=80') center/cover no-repeat">
+      <div class="gallery-overlay"></div>
+      <div class="gallery-label">Pit Lane Bar</div>
+    </div>
+    <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1486947799489-3fabdd7d32a6?w=800&q=80') center/cover no-repeat">
+      <div class="gallery-overlay"></div>
+      <div class="gallery-label">The Hauler Wine Cellar</div>
+    </div>
+    <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&q=80') center/cover no-repeat">
+      <div class="gallery-overlay"></div>
+      <div class="gallery-label">Private Dining:<br>The Winner's Circle</div>
+    </div>
+    <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&q=80') center/cover no-repeat">
+      <div class="gallery-overlay"></div>
+      <div class="gallery-label">Rooftop Terrace</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ RESERVATIONS ═══════════ -->
+<section id="reservations">
+  <div class="section-header">
+    <div class="section-number">— 05 —</div>
+    <h2>Book Your <span class="accent">Grid Position</span></h2>
+    <p>Secure your seat before the green flag drops.</p>
+  </div>
+
+  <div class="reservation-container">
+    <form class="reservation-form" onsubmit="event.preventDefault(); alert('Reservation confirmed! See you at the grid, champion.');">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Dale Earnhardt III" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="speed@champion.com" required>
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" required>
+      </div>
+      <div class="form-group">
+        <label>Time</label>
+        <select required>
+          <option value="">Select a time</option>
+          <option>5:00 PM — Early Bird Lap</option>
+          <option>6:00 PM</option>
+          <option>6:30 PM</option>
+          <option>7:00 PM — Prime Time</option>
+          <option>7:30 PM</option>
+          <option>8:00 PM</option>
+          <option>8:30 PM — Late Lap</option>
+          <option>9:00 PM</option>
+          <option>9:30 PM — Final Stint</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Party Size</label>
+        <select required>
+          <option value="">How many in your crew?</option>
+          <option>1 — Solo Driver</option>
+          <option>2 — Tandem</option>
+          <option>3-4 — Crew Chief + Team</option>
+          <option>5-6 — Full Pit Crew</option>
+          <option>7-10 — VIP Suite</option>
+          <option>10+ — Winner's Circle (Private)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Seating Preference</label>
+        <select>
+          <option value="">No preference</option>
+          <option>Main Dining Room</option>
+          <option>Pit Lane Bar</option>
+          <option>The Winner's Circle (Private)</option>
+          <option>Rooftop Terrace</option>
+          <option>Chef's Counter (V8 Kitchen View)</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Special Requests</label>
+        <textarea placeholder="Allergies, celebrations, or 'Please don't yell at me like Gordon Ramsay'..."></textarea>
+      </div>
+      <p class="form-note">For parties of 10+, please call us directly. Walk-ins welcome at the Pit Lane Bar.</p>
+      <div class="form-submit">
+        <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<div class="checkered-divider thin"></div>
+
+<!-- ═══════════ MERCH ═══════════ -->
+<section id="merch">
+  <div class="section-header">
+    <div class="section-number">— 06 —</div>
+    <h2>The <span class="accent">Merch Pit</span></h2>
+    <p>Take a piece of the track home with you.</p>
+  </div>
+
+  <div class="merch-grid">
+    <div class="merch-card">
+      <div class="merch-image"><div class="merch-emoji">👕</div></div>
+      <div class="merch-info">
+        <h3>Fire Suit Apron</h3>
+        <div class="merch-desc">Nomex-inspired chef's apron in DuPont rainbow colors. Heat-resistant (metaphorically).</div>
+        <div class="merch-price">$65</div>
+      </div>
+    </div>
+
+    <div class="merch-card">
+      <div class="merch-image"><div class="merch-emoji">🧢</div></div>
+      <div class="merch-info">
+        <h3>#24 Trucker Cap</h3>
+        <div class="merch-desc">Vintage-wash snapback with embroidered flame logo and "It's RAW!" on the back.</div>
+        <div class="merch-price">$38</div>
+      </div>
+    </div>
+
+    <div class="merch-card">
+      <div class="merch-image"><div class="merch-emoji">🔪</div></div>
+      <div class="merch-info">
+        <h3>Signature Steak Knife Set</h3>
+        <div class="merch-desc">Japanese steel, rainbow titanium coating, walnut handles. Set of 4 in a checkered flag box.</div>
+        <div class="merch-price">$185</div>
+      </div>
+    </div>
+
+    <div class="merch-card">
+      <div class="merch-image"><div class="merch-emoji">🌶️</div></div>
+      <div class="merch-info">
+        <h3>"Lap 500" Hot Sauce</h3>
+        <div class="merch-desc">House-made Carolina Reaper blend. 500,000 Scoville units. Signed bottle.</div>
+        <div class="merch-price">$24</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="checkered-divider thin"></div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-number">— 07 —</div>
+    <h2>Find <span class="accent">The Track</span></h2>
+    <p>We're right where the action is.</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-item">
+      <h3>Location</h3>
+      <p>
+        2400 Victory Lane<br>
+        Charlotte, NC 28202<br>
+        <em style="font-size:0.8rem; color: var(--dupont-orange);">Adjacent to Charlotte Motor Speedway</em>
+      </p>
+    </div>
+    <div class="contact-item">
+      <h3>Hours</h3>
+      <p>
+        Tuesday – Thursday: 5pm – 10pm<br>
+        Friday – Saturday: 5pm – 12am<br>
+        Sunday Brunch: 11am – 3pm<br>
+        Monday: Closed (Rest Day)
+      </p>
+    </div>
+    <div class="contact-item">
+      <h3>Get in Touch</h3>
+      <p>
+        <a href="tel:+17042400024">(704) 240-0024</a><br>
+        <a href="mailto:reservations@jeffgordonramseys.com">reservations@jeffgordonramseys.com</a><br>
+        <a href="#">@JeffGordonRamseys</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="checkered-divider"></div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-logo">Jeff Gordon Ramsey's</div>
+  <div class="footer-socials">
+    <a href="#">Instagram</a>
+    <a href="#">TikTok</a>
+    <a href="#">X / Twitter</a>
+    <a href="#">Facebook</a>
+    <a href="#">Yelp</a>
+  </div>
+  <div class="footer-copy">
+    &copy; 2024–2026 Jeff Gordon Ramsey's Motorsport Steakhouse. All rights reserved.
+    <span class="flames">"If you can't stand the heat, get out of the pits."</span>
+  </div>
+</footer>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+  // Menu Tab Switching
+  function showMenu(section) {
+    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(section).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Close mobile menu
+        document.querySelector('.nav-links').classList.remove('open');
+      }
+    });
+  });
+
+  // Navbar background on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.borderBottomColor = 'var(--dupont-red)';
+      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.5)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.menu-item, .cocktail-card, .merch-card, .gallery-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'all 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
