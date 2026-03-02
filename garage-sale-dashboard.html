@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RVIA Community Garage Sale Weekend</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+:root {
+  --primary: #65c18b;
+  --primary-dark: #4da872;
+  --primary-light: #e8f7ef;
+  --accent: #f5a623;
+  --text: #2c3e50;
+  --text-light: #6b7c8d;
+  --bg: #f8faf9;
+  --white: #ffffff;
+  --border: #dde8e2;
+  --danger: #e74c3c;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  --radius: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+
+/* HEADER */
+.header { background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 100%); color:white; position:sticky; top:0; z-index:1000; box-shadow:0 2px 20px rgba(101,193,139,0.3); }
+.header-top { display:flex; align-items:center; justify-content:space-between; max-width:1400px; margin:0 auto; padding:16px 24px; flex-wrap:wrap; gap:12px; }
+.header-brand { display:flex; align-items:center; gap:16px; }
+.header-logo { width:50px; height:50px; background:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--primary); font-size:16px; flex-shrink:0; }
+.header-titles h1 { font-size:22px; font-weight:800; letter-spacing:-0.5px; line-height:1.2; }
+.header-titles .subtitle { font-size:13px; opacity:0.9; }
+.header-right { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.stat-badge { text-align:center; background:rgba(255,255,255,0.15); padding:8px 16px; border-radius:10px; }
+.stat-badge .num { font-size:24px; font-weight:800; display:block; line-height:1; }
+.stat-badge .label { font-size:11px; text-transform:uppercase; letter-spacing:0.5px; opacity:0.85; }
+
+/* USER BADGE */
+.user-badge { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.2); padding:6px 14px; border-radius:20px; cursor:pointer; transition:background 0.15s; }
+.user-badge:hover { background:rgba(255,255,255,0.3); }
+.user-avatar { width:30px; height:30px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:white; }
+.user-name { font-size:13px; font-weight:600; }
+.user-badge .sign-out { font-size:11px; opacity:0.8; margin-left:4px; }
+
+/* COUNTDOWN BAR */
+.countdown-bar { background:rgba(0,0,0,0.15); padding:10px 24px; text-align:center; font-size:14px; }
+.countdown-label { font-weight:600; margin-right:8px; }
+.countdown-timer { display:inline-flex; gap:6px; font-variant-numeric:tabular-nums; }
+.countdown-unit { background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:6px; font-weight:700; font-size:15px; }
+.countdown-unit small { font-weight:400; font-size:10px; margin-left:2px; text-transform:uppercase; }
+.date-tbd { background:var(--accent); color:#333; padding:3px 12px; border-radius:20px; font-weight:700; font-size:13px; cursor:pointer; border:none; margin-left:8px; font-family:inherit; }
+
+/* LAYOUT */
+.main-container { max-width:1400px; margin:0 auto; padding:24px; display:grid; grid-template-columns:400px 1fr; gap:24px; min-height:calc(100vh - 140px); }
+.sidebar { display:flex; flex-direction:column; gap:20px; max-height:calc(100vh - 180px); position:sticky; top:150px; }
+
+/* CARDS */
+.card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
+.card-header { padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.card-header h2 { font-size:16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+.card-header h2 i { color:var(--primary); }
+.card-body { padding:20px; }
+
+/* FORMS */
+.form-group { margin-bottom:14px; }
+.form-group label { display:block; font-size:13px; font-weight:600; margin-bottom:5px; }
+.form-group label .req { color:var(--danger); }
+.form-input { width:100%; padding:10px 14px; border:2px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; transition:all 0.2s; background:var(--bg); }
+.form-input:focus { outline:none; border-color:var(--primary); background:white; box-shadow:0 0 0 3px rgba(101,193,139,0.15); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+.day-toggle { display:flex; gap:8px; }
+.day-btn { flex:1; padding:10px; border:2px solid var(--border); border-radius:8px; background:var(--bg); font-size:13px; font-weight:600; cursor:pointer; transition:all 0.2s; text-align:center; font-family:inherit; }
+.day-btn.active { border-color:var(--primary); background:var(--primary-light); color:var(--primary-dark); }
+.day-btn:hover { border-color:var(--primary); }
+
+.btn-primary { width:100%; padding:12px; background:linear-gradient(135deg,var(--primary-dark),var(--primary)); color:white; border:none; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn-primary:hover { transform:translateY(-1px); box-shadow:0 4px 15px rgba(101,193,139,0.4); }
+.btn-primary:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+.btn-secondary { padding:8px 16px; background:transparent; color:var(--text-light); border:2px solid var(--border); border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.15s; }
+.btn-secondary:hover { border-color:var(--primary); color:var(--primary); }
+.btn-danger { padding:8px 16px; background:transparent; color:var(--danger); border:2px solid #fcc; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.15s; }
+.btn-danger:hover { background:#fde8e8; border-color:var(--danger); }
+
+/* CATEGORIES */
+.categories { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+.cat-chip { padding:5px 12px; border-radius:20px; font-size:12px; font-weight:600; border:2px solid var(--border); background:var(--bg); cursor:pointer; transition:all 0.2s; user-select:none; }
+.cat-chip.active { border-color:var(--primary); background:var(--primary-light); color:var(--primary-dark); }
+.cat-chip:hover { border-color:var(--primary); }
+
+/* LISTINGS */
+.listings-panel { flex:1; overflow-y:auto; max-height:380px; }
+.listing-item { padding:14px 20px; border-bottom:1px solid var(--border); cursor:pointer; transition:background 0.15s; position:relative; }
+.listing-item:hover { background:var(--primary-light); }
+.listing-item.owned { border-left:4px solid var(--accent); background:#fffdf7; }
+.listing-item.owned:hover { background:#fff8ec; }
+.listing-row { display:flex; align-items:flex-start; gap:12px; }
+.listing-num { width:28px; height:28px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; margin-top:2px; }
+.listing-info { flex:1; min-width:0; }
+.listing-address { font-weight:600; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.listing-meta { font-size:12px; color:var(--text-light); margin-top:2px; display:flex; flex-wrap:wrap; gap:8px; }
+.listing-meta span { display:flex; align-items:center; gap:4px; }
+.listing-tags { display:flex; gap:4px; margin-top:6px; flex-wrap:wrap; }
+.listing-tag { font-size:10px; padding:2px 8px; border-radius:10px; background:var(--primary-light); color:var(--primary-dark); font-weight:600; }
+.listing-owner-tag { font-size:10px; padding:2px 8px; border-radius:10px; background:#fff3e0; color:#e67e22; font-weight:600; }
+.listing-star-btn { width:30px; height:30px; border:none; border-radius:6px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:14px; transition:all 0.15s; background:transparent; color:var(--text-light); flex-shrink:0; }
+.listing-star-btn:hover { background:var(--primary-light); color:var(--accent); }
+.listing-star-btn.starred { color:var(--accent); }
+
+/* OWNER ACTION BAR — prominent buttons for edit/delete */
+.owner-actions { display:flex; gap:8px; margin-top:10px; margin-left:40px; }
+.owner-action-btn { display:flex; align-items:center; gap:5px; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer; border:1.5px solid; transition:all 0.15s; font-family:inherit; background:white; }
+.owner-action-btn.edit-btn { color:#3b82f6; border-color:#bfdbfe; }
+.owner-action-btn.edit-btn:hover { background:#eff6ff; border-color:#3b82f6; }
+.owner-action-btn.delete-btn { color:var(--danger); border-color:#fcc; }
+.owner-action-btn.delete-btn:hover { background:#fef2f2; border-color:var(--danger); }
+
+/* ADMIN */
+.admin-badge { display:inline-flex; align-items:center; gap:4px; background:linear-gradient(135deg,#7c3aed,#a855f7); color:white; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; }
+.listing-admin-tag { font-size:10px; padding:2px 8px; border-radius:10px; background:#f3e8ff; color:#7c3aed; font-weight:600; }
+.listing-item.admin-managed { border-left:4px solid #a855f7; background:#faf5ff; }
+.listing-item.admin-managed:hover { background:#f3e8ff; }
+
+/* MAP */
+.map-container { display:flex; flex-direction:column; gap:16px; }
+.map-card { flex:1; min-height:500px; display:flex; flex-direction:column; }
+.map-toolbar { padding:12px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+.filter-chips { display:flex; gap:6px; flex-wrap:wrap; }
+.filter-chip { padding:5px 12px; border-radius:20px; font-size:12px; font-weight:600; border:1.5px solid var(--border); background:white; cursor:pointer; transition:all 0.15s; }
+.filter-chip.active { border-color:var(--primary); background:var(--primary-light); color:var(--primary-dark); }
+.filter-chip:hover { border-color:var(--primary); }
+#map { width:100%; flex:1; min-height:500px; border-radius:0 0 var(--radius) var(--radius); z-index:1; }
+
+/* ROUTE PANEL */
+.route-panel { display:none; }
+.route-panel.visible { display:block; }
+.route-info { padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.route-stats { display:flex; gap:20px; }
+.route-stat { text-align:center; }
+.route-stat .val { font-size:20px; font-weight:800; color:var(--primary-dark); }
+.route-stat .lbl { font-size:11px; color:var(--text-light); text-transform:uppercase; letter-spacing:0.5px; }
+.btn-route { padding:10px 20px; background:var(--accent); color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:6px; transition:all 0.2s; }
+.btn-route:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(245,166,35,0.3); }
+
+/* MODALS */
+.modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:3000; align-items:center; justify-content:center; }
+.modal-overlay.show { display:flex; }
+.modal { background:white; border-radius:var(--radius); padding:32px; max-width:460px; width:90%; box-shadow:var(--shadow-lg); max-height:90vh; overflow-y:auto; }
+.modal h3 { font-size:20px; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.modal h3 i { color:var(--primary); }
+.modal p { color:var(--text-light); margin-bottom:20px; font-size:14px; }
+.modal-actions { display:flex; gap:10px; margin-top:20px; justify-content:flex-end; }
+
+/* SIGN-IN PANEL */
+.sign-in-card .card-body { text-align:center; }
+.sign-in-card .welcome-icon { font-size:48px; color:var(--primary); margin-bottom:12px; }
+.sign-in-card p { font-size:14px; color:var(--text-light); margin-bottom:20px; }
+
+/* TOAST */
+.toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--text); color:white; padding:14px 24px; border-radius:10px; font-size:14px; font-weight:600; box-shadow:var(--shadow-lg); z-index:4000; transition:transform 0.3s ease; display:flex; align-items:center; gap:8px; }
+.toast.show { transform:translateX(-50%) translateY(0); }
+.toast i { font-size:18px; }
+.toast.success i { color:var(--primary); }
+.toast.error i { color:var(--danger); }
+
+/* EMPTY STATE */
+.empty-state { padding:40px 20px; text-align:center; color:var(--text-light); }
+.empty-state i { font-size:48px; color:var(--border); margin-bottom:16px; display:block; }
+
+/* SPINNER */
+.spinner { display:inline-block; width:16px; height:16px; border:2px solid rgba(255,255,255,0.3); border-top-color:white; border-radius:50%; animation:spin 0.6s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* FOOTER */
+.footer { text-align:center; padding:30px; color:var(--text-light); font-size:13px; border-top:1px solid var(--border); margin-top:40px; }
+.footer a { color:var(--primary); text-decoration:none; font-weight:600; }
+
+/* RESPONSIVE */
+@media (max-width:960px) {
+  .main-container { grid-template-columns:1fr; padding:16px; }
+  .sidebar { position:static; max-height:none; }
+  .header-right .stat-badge { display:none; }
+  .header-top { padding:12px 16px; }
+  .header-titles h1 { font-size:17px; }
+  #map { min-height:350px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-top">
+    <div class="header-brand">
+      <div class="header-logo">RVIA</div>
+      <div class="header-titles">
+        <h1><i class="fas fa-store"></i> Community Garage Sale Weekend</h1>
+        <div class="subtitle">Riverview Improvement Association &bull; Warwick, RI &bull; Est. 1903</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="stat-badge">
+        <span class="num" id="totalSales">0</span>
+        <span class="label">Sales Listed</span>
+      </div>
+      <div class="stat-badge">
+        <span class="num" id="starredCount">0</span>
+        <span class="label">On Your Route</span>
+      </div>
+      <div id="userArea"></div>
+    </div>
+  </div>
+  <div class="countdown-bar">
+    <span class="countdown-label"><i class="fas fa-clock"></i> Garage Sale Weekend:</span>
+    <span id="countdownDisplay"></span>
+  </div>
+</header>
+
+<!-- DATE MODAL -->
+<div class="modal-overlay" id="dateModal">
+  <div class="modal">
+    <h3><i class="fas fa-calendar-alt"></i> Set Sale Weekend</h3>
+    <p>Pick the Saturday of the garage sale weekend. Sunday is assumed the next day.</p>
+    <div class="form-group">
+      <label>Saturday Date</label>
+      <input type="date" class="form-input" id="saleDateInput">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeDateModal()">Cancel</button>
+      <button class="btn-primary" style="width:auto;padding:10px 24px;" onclick="setSaleDate()"><i class="fas fa-check"></i> Set Date</button>
+    </div>
+  </div>
+</div>
+
+<!-- SIGN-IN MODAL -->
+<div class="modal-overlay" id="signInModal">
+  <div class="modal">
+    <h3><i class="fas fa-user-plus"></i> Join the Garage Sale</h3>
+    <p>Sign in so you can add, edit, and remove your listings. Your name will appear on your sale pin.</p>
+    <div class="form-group">
+      <label>Your Name <span class="req">*</span></label>
+      <input type="text" class="form-input" id="signInName" placeholder="e.g. The Johnsons">
+    </div>
+    <div class="form-group">
+      <label>Email <span class="req">*</span></label>
+      <input type="email" class="form-input" id="signInEmail" placeholder="you@email.com">
+      <small style="color:var(--text-light);font-size:11px;margin-top:4px;display:block;">Used only to identify your listings — not shared publicly.</small>
+    </div>
+    <div class="form-group">
+      <label>Phone <small style="color:var(--text-light);">(optional, shown on listing)</small></label>
+      <input type="tel" class="form-input" id="signInPhone" placeholder="(401) 555-1234">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeSignInModal()">Cancel</button>
+      <button class="btn-primary" style="width:auto;padding:10px 24px;" onclick="handleSignIn()"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT SALE MODAL -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <h3><i class="fas fa-edit"></i> Edit Your Sale</h3>
+    <p>Update the details for your listing.</p>
+    <input type="hidden" id="editSaleId">
+    <div class="form-group">
+      <label>Street Address <span class="req">*</span></label>
+      <input type="text" class="form-input" id="editAddress" placeholder="123 Riverview Dr, Warwick, RI">
+    </div>
+    <div class="form-group">
+      <label>Days</label>
+      <div class="day-toggle">
+        <button type="button" class="day-btn active" id="editSat" onclick="this.classList.toggle('active')"><i class="fas fa-sun"></i> Saturday</button>
+        <button type="button" class="day-btn active" id="editSun" onclick="this.classList.toggle('active')"><i class="fas fa-sun"></i> Sunday</button>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Start Time</label>
+        <input type="time" class="form-input" id="editStartTime">
+      </div>
+      <div class="form-group">
+        <label>End Time</label>
+        <input type="time" class="form-input" id="editEndTime">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Categories</label>
+      <div class="categories" id="editCategoryPicker">
+        <span class="cat-chip" data-cat="furniture" onclick="this.classList.toggle('active')">🪑 Furniture</span>
+        <span class="cat-chip" data-cat="kids" onclick="this.classList.toggle('active')">🧸 Kids/Toys</span>
+        <span class="cat-chip" data-cat="electronics" onclick="this.classList.toggle('active')">📱 Electronics</span>
+        <span class="cat-chip" data-cat="clothing" onclick="this.classList.toggle('active')">👕 Clothing</span>
+        <span class="cat-chip" data-cat="tools" onclick="this.classList.toggle('active')">🔧 Tools</span>
+        <span class="cat-chip" data-cat="books" onclick="this.classList.toggle('active')">📚 Books</span>
+        <span class="cat-chip" data-cat="sports" onclick="this.classList.toggle('active')">⚽ Sports</span>
+        <span class="cat-chip" data-cat="antiques" onclick="this.classList.toggle('active')">🏺 Antiques</span>
+        <span class="cat-chip" data-cat="misc" onclick="this.classList.toggle('active')">📦 Misc</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Notes</label>
+      <input type="text" class="form-input" id="editNotes" placeholder="e.g. 'Multi-family sale!'">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-danger" onclick="deleteSaleFromEdit()"><i class="fas fa-trash"></i> Delete</button>
+      <div style="flex:1;"></div>
+      <button class="btn-secondary" onclick="closeEditModal()">Cancel</button>
+      <button class="btn-primary" style="width:auto;padding:10px 24px;" id="editSaveBtn" onclick="saveEdit()"><i class="fas fa-save"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- ADD SALE FORM (shown when signed in) / SIGN-IN PROMPT -->
+    <div id="addSaleSection"></div>
+
+    <!-- LISTINGS -->
+    <div class="card" style="flex:1;display:flex;flex-direction:column;">
+      <div class="card-header">
+        <h2><i class="fas fa-list"></i> Sales (<span id="listCount">0</span>)</h2>
+        <button class="btn-secondary" style="font-size:12px;padding:5px 12px;" onclick="toggleStarredFilter()" id="starFilterBtn"><i class="fas fa-star"></i> Show Starred</button>
+      </div>
+      <div class="listings-panel" id="listingsPanel">
+        <div class="empty-state"><i class="fas fa-store-slash"></i><p>No sales listed yet.<br>Be the first to add yours!</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <div class="map-container">
+    <div class="card map-card">
+      <div class="map-toolbar">
+        <div class="filter-chips">
+          <span class="filter-chip active" data-filter="all" onclick="setFilter('all',this)">All</span>
+          <span class="filter-chip" data-filter="saturday" onclick="setFilter('saturday',this)">Saturday Only</span>
+          <span class="filter-chip" data-filter="sunday" onclick="setFilter('sunday',this)">Sunday Only</span>
+          <span class="filter-chip" data-filter="both" onclick="setFilter('both',this)">Both Days</span>
+        </div>
+        <div style="font-size:12px;color:var(--text-light);"><i class="fas fa-mouse-pointer"></i> Click pins for details &bull; <i class="fas fa-star" style="color:var(--accent)"></i> Star to plan route</div>
+      </div>
+      <div id="map"></div>
+    </div>
+
+    <!-- ROUTE PLANNER -->
+    <div class="card route-panel" id="routePanel">
+      <div class="card-header">
+        <h2><i class="fas fa-route"></i> Your Sale Route</h2>
+        <button class="btn-secondary" style="font-size:12px;padding:5px 12px;" onclick="clearRoute()"><i class="fas fa-times"></i> Clear Route</button>
+      </div>
+      <div class="route-info">
+        <div class="route-stats">
+          <div class="route-stat"><span class="val" id="routeStops">0</span><span class="lbl">Stops</span></div>
+          <div class="route-stat"><span class="val" id="routeDistance">--</span><span class="lbl">Miles</span></div>
+          <div class="route-stat"><span class="val" id="routeTime">--</span><span class="lbl">Est. Drive</span></div>
+        </div>
+        <button class="btn-route" onclick="openInGoogleMaps()"><i class="fas fa-directions"></i> Open in Google Maps</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>Riverview Improvement Association</strong> — Neighbors Helping Neighbors Since 1903<br>
+  <a href="https://myrvia.org" target="_blank">myrvia.org</a> &bull;
+  <i class="fab fa-facebook" style="color:#1877f2"></i> <i class="fab fa-instagram" style="color:#e4405f"></i></p>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+
+<script>
+(function(){
+  /* ====================== DATA ====================== */
+  const SALES_KEY = 'rvia_garage_sales';
+  const DATE_KEY = 'rvia_sale_date';
+  const USER_KEY = 'rvia_user';
+  const STARS_KEY = 'rvia_starred';
+
+  const ADMIN_EMAILS = ['dan@myrvia.org'];
+
+  let sales = JSON.parse(localStorage.getItem(SALES_KEY) || '[]');
+  let saleDate = localStorage.getItem(DATE_KEY) || null;
+  let currentUser = JSON.parse(localStorage.getItem(USER_KEY) || 'null');
+  let starredIds = new Set(JSON.parse(localStorage.getItem(STARS_KEY) || '[]'));
+  let currentFilter = 'all';
+  let showStarredOnly = false;
+  let map, markersLayer, routeLine;
+
+  function isAdmin() {
+    return currentUser && ADMIN_EMAILS.includes(currentUser.email);
+  }
+
+  /* ====================== MAP INIT ====================== */
+  function initMap() {
+    map = L.map('map', { zoomControl: true }).setView([41.6998, -71.4063], 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19
+    }).addTo(map);
+    markersLayer = L.layerGroup().addTo(map);
+    renderAll();
+  }
+
+  /* ====================== GEOCODE (Nominatim) ====================== */
+  async function geocodeAddress(address) {
+    const url = 'https://nominatim.openstreetmap.org/search?' + new URLSearchParams({
+      q: address, format: 'json', limit: '1', countrycodes: 'us'
+    });
+    const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!resp.ok) throw new Error('Geocoding service unavailable. Please try again.');
+    const results = await resp.json();
+    if (!results.length) throw new Error('Address not found. Try including street number and "Warwick, RI".');
+    return { lat: parseFloat(results[0].lat), lng: parseFloat(results[0].lon), formatted: results[0].display_name };
+  }
+
+  /* ====================== USER / AUTH ====================== */
+  function renderUserArea() {
+    const el = document.getElementById('userArea');
+    if (currentUser) {
+      const initials = currentUser.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+      const adminTag = isAdmin() ? '<span class="admin-badge"><i class="fas fa-shield-alt"></i> Admin</span>' : '';
+      el.innerHTML = `
+        ${adminTag}
+        <div class="user-badge" onclick="toggleUserMenu()">
+          <div class="user-avatar" ${isAdmin() ? 'style="background:#7c3aed;"' : ''}>${initials}</div>
+          <span class="user-name">${currentUser.name}</span>
+          <span class="sign-out" title="Sign out"><i class="fas fa-sign-out-alt"></i></span>
+        </div>`;
+    } else {
+      el.innerHTML = `
+        <button class="btn-secondary" style="color:white;border-color:rgba(255,255,255,0.4);font-size:13px;padding:8px 16px;" onclick="openSignInModal()">
+          <i class="fas fa-sign-in-alt"></i> Sign In
+        </button>`;
+    }
+  }
+
+  function renderAddSaleSection() {
+    const el = document.getElementById('addSaleSection');
+    if (!currentUser) {
+      el.innerHTML = `
+        <div class="card sign-in-card">
+          <div class="card-body">
+            <div class="welcome-icon"><i class="fas fa-hands-helping"></i></div>
+            <h3 style="margin-bottom:8px;">Welcome, Neighbor!</h3>
+            <p>Sign in to add your garage sale to the map, or browse the sales below.</p>
+            <button class="btn-primary" onclick="openSignInModal()"><i class="fas fa-user-plus"></i> Sign In to List Your Sale</button>
+          </div>
+        </div>`;
+      return;
+    }
+
+    el.innerHTML = `
+      <div class="card">
+        <div class="card-header">
+          <h2><i class="fas fa-plus-circle"></i> Add Your Sale</h2>
+        </div>
+        <div class="card-body">
+          <form id="addSaleForm" onsubmit="handleAddSale(event)">
+            <div class="form-group">
+              <label>Street Address <span class="req">*</span></label>
+              <input type="text" class="form-input" id="addressInput" placeholder="e.g. 123 Riverview Dr" required>
+            </div>
+            <div class="form-group">
+              <label>Days <span class="req">*</span></label>
+              <div class="day-toggle">
+                <button type="button" class="day-btn active" data-day="saturday" onclick="this.classList.toggle('active')"><i class="fas fa-sun"></i> Saturday</button>
+                <button type="button" class="day-btn active" data-day="sunday" onclick="this.classList.toggle('active')"><i class="fas fa-sun"></i> Sunday</button>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Start Time <span class="req">*</span></label>
+                <input type="time" class="form-input" id="startTime" value="08:00" required>
+              </div>
+              <div class="form-group">
+                <label>End Time <span class="req">*</span></label>
+                <input type="time" class="form-input" id="endTime" value="14:00" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>What are you selling?</label>
+              <div class="categories" id="categoryPicker">
+                <span class="cat-chip" data-cat="furniture" onclick="this.classList.toggle('active')">🪑 Furniture</span>
+                <span class="cat-chip" data-cat="kids" onclick="this.classList.toggle('active')">🧸 Kids/Toys</span>
+                <span class="cat-chip" data-cat="electronics" onclick="this.classList.toggle('active')">📱 Electronics</span>
+                <span class="cat-chip" data-cat="clothing" onclick="this.classList.toggle('active')">👕 Clothing</span>
+                <span class="cat-chip" data-cat="tools" onclick="this.classList.toggle('active')">🔧 Tools</span>
+                <span class="cat-chip" data-cat="books" onclick="this.classList.toggle('active')">📚 Books</span>
+                <span class="cat-chip" data-cat="sports" onclick="this.classList.toggle('active')">⚽ Sports</span>
+                <span class="cat-chip" data-cat="antiques" onclick="this.classList.toggle('active')">🏺 Antiques</span>
+                <span class="cat-chip" data-cat="misc" onclick="this.classList.toggle('active')">📦 Misc</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Notes</label>
+              <input type="text" class="form-input" id="notesInput" placeholder="e.g. 'Multi-family sale!' or 'Cash only'">
+            </div>
+            <button type="submit" class="btn-primary" id="submitBtn"><i class="fas fa-map-pin"></i> Add My Sale to the Map</button>
+          </form>
+        </div>
+      </div>`;
+  }
+
+  window.openSignInModal = function() {
+    document.getElementById('signInModal').classList.add('show');
+    setTimeout(() => document.getElementById('signInName').focus(), 100);
+  };
+  window.closeSignInModal = function() { document.getElementById('signInModal').classList.remove('show'); };
+
+  window.handleSignIn = function() {
+    const name = document.getElementById('signInName').value.trim();
+    const email = document.getElementById('signInEmail').value.trim();
+    const phone = document.getElementById('signInPhone').value.trim();
+    if (!name || !email) { showToast('Please enter your name and email.', 'error'); return; }
+    if (!email.includes('@')) { showToast('Please enter a valid email address.', 'error'); return; }
+    currentUser = { name, email: email.toLowerCase(), phone, id: email.toLowerCase() };
+    localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+    closeSignInModal();
+    renderUserArea();
+    renderAddSaleSection();
+    renderListings();
+    showToast(`Welcome, ${name}! You can now add your sale.`, 'success');
+  };
+
+  window.toggleUserMenu = function() {
+    if (confirm('Sign out? You can sign back in anytime to manage your listings.')) {
+      currentUser = null;
+      localStorage.removeItem(USER_KEY);
+      renderUserArea();
+      renderAddSaleSection();
+      renderListings();
+      showToast('Signed out.', 'success');
+    }
+  };
+
+  /* ====================== ADD SALE ====================== */
+  window.handleAddSale = async function(e) {
+    e.preventDefault();
+    if (!currentUser) { openSignInModal(); return; }
+
+    const btn = document.getElementById('submitBtn');
+    const address = document.getElementById('addressInput').value.trim();
+    const saturday = document.querySelector('#addSaleForm .day-btn[data-day="saturday"]').classList.contains('active');
+    const sunday = document.querySelector('#addSaleForm .day-btn[data-day="sunday"]').classList.contains('active');
+    const startTime = document.getElementById('startTime').value;
+    const endTime = document.getElementById('endTime').value;
+    const notes = document.getElementById('notesInput').value.trim();
+
+    if (!saturday && !sunday) { showToast('Please select at least one day.', 'error'); return; }
+
+    const selectedCats = [];
+    document.querySelectorAll('#categoryPicker .cat-chip.active').forEach(c => selectedCats.push(c.dataset.cat));
+
+    let fullAddress = address;
+    if (!/warwick/i.test(address) && !/\bri\b/i.test(address)) fullAddress += ', Warwick, RI';
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Locating address...';
+
+    try {
+      const geo = await geocodeAddress(fullAddress);
+      const sale = {
+        id: Date.now().toString(36) + Math.random().toString(36).substr(2,5),
+        address, formattedAddress: geo.formatted,
+        ownerName: currentUser.name, ownerEmail: currentUser.email, ownerPhone: currentUser.phone || '',
+        lat: geo.lat, lng: geo.lng,
+        saturday, sunday, startTime, endTime,
+        categories: selectedCats, notes,
+        createdAt: new Date().toISOString()
+      };
+      sales.push(sale);
+      saveSales();
+      renderAll();
+
+      // Reset form
+      document.getElementById('addSaleForm').reset();
+      document.getElementById('startTime').value = '08:00';
+      document.getElementById('endTime').value = '14:00';
+      document.querySelectorAll('#addSaleForm .day-btn').forEach(b => b.classList.add('active'));
+      document.querySelectorAll('#categoryPicker .cat-chip').forEach(c => c.classList.remove('active'));
+
+      showToast('Your sale has been added to the map!', 'success');
+      map.setView([geo.lat, geo.lng], 17);
+    } catch (err) {
+      showToast(err.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-map-pin"></i> Add My Sale to the Map';
+    }
+  };
+
+  /* ====================== EDIT / DELETE ====================== */
+  window.openEditModal = function(id) {
+    const sale = sales.find(s => s.id === id);
+    if (!sale) return;
+    document.getElementById('editSaleId').value = id;
+    document.getElementById('editAddress').value = sale.address;
+    document.getElementById('editStartTime').value = sale.startTime;
+    document.getElementById('editEndTime').value = sale.endTime;
+    document.getElementById('editNotes').value = sale.notes || '';
+
+    const satBtn = document.getElementById('editSat');
+    const sunBtn = document.getElementById('editSun');
+    satBtn.classList.toggle('active', sale.saturday);
+    sunBtn.classList.toggle('active', sale.sunday);
+
+    document.querySelectorAll('#editCategoryPicker .cat-chip').forEach(c => {
+      c.classList.toggle('active', sale.categories.includes(c.dataset.cat));
+    });
+
+    document.getElementById('editModal').classList.add('show');
+  };
+
+  window.closeEditModal = function() { document.getElementById('editModal').classList.remove('show'); };
+
+  window.saveEdit = async function() {
+    const id = document.getElementById('editSaleId').value;
+    const sale = sales.find(s => s.id === id);
+    if (!sale) return;
+
+    const newAddress = document.getElementById('editAddress').value.trim();
+    const saturday = document.getElementById('editSat').classList.contains('active');
+    const sunday = document.getElementById('editSun').classList.contains('active');
+
+    if (!saturday && !sunday) { showToast('Please select at least one day.', 'error'); return; }
+
+    const saveBtn = document.getElementById('editSaveBtn');
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = '<span class="spinner"></span> Saving...';
+
+    try {
+      // Re-geocode if address changed
+      if (newAddress !== sale.address) {
+        let fullAddress = newAddress;
+        if (!/warwick/i.test(newAddress) && !/\bri\b/i.test(newAddress)) fullAddress += ', Warwick, RI';
+        const geo = await geocodeAddress(fullAddress);
+        sale.lat = geo.lat;
+        sale.lng = geo.lng;
+        sale.formattedAddress = geo.formatted;
+      }
+
+      sale.address = newAddress;
+      sale.saturday = saturday;
+      sale.sunday = sunday;
+      sale.startTime = document.getElementById('editStartTime').value;
+      sale.endTime = document.getElementById('editEndTime').value;
+      sale.notes = document.getElementById('editNotes').value.trim();
+
+      const cats = [];
+      document.querySelectorAll('#editCategoryPicker .cat-chip.active').forEach(c => cats.push(c.dataset.cat));
+      sale.categories = cats;
+
+      saveSales();
+      renderAll();
+      closeEditModal();
+      showToast('Sale updated!', 'success');
+    } catch (err) {
+      showToast(err.message, 'error');
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+    }
+  };
+
+  window.deleteSaleFromEdit = function() {
+    const id = document.getElementById('editSaleId').value;
+    if (!confirm('Are you sure you want to remove this sale?')) return;
+    sales = sales.filter(s => s.id !== id);
+    starredIds.delete(id);
+    saveSales();
+    saveStars();
+    renderAll();
+    closeEditModal();
+    showToast('Sale removed.', 'success');
+  };
+
+  window.removeSale = function(id) {
+    if (!confirm('Remove this sale from the map?')) return;
+    sales = sales.filter(s => s.id !== id);
+    starredIds.delete(id);
+    saveSales();
+    saveStars();
+    renderAll();
+    showToast('Sale removed.', 'success');
+  };
+
+  function isOwner(sale) {
+    return currentUser && sale.ownerEmail === currentUser.email;
+  }
+
+  function canManage(sale) {
+    return isOwner(sale) || isAdmin();
+  }
+
+  /* ====================== RENDER ====================== */
+  function renderAll() {
+    renderMarkers();
+    renderListings();
+    updateStats();
+    updateRoutePanel();
+    renderUserArea();
+    renderAddSaleSection();
+    updateCountdown();
+  }
+
+  function getFilteredSales() {
+    let filtered = [...sales];
+    if (currentFilter === 'saturday') filtered = filtered.filter(s => s.saturday && !s.sunday);
+    else if (currentFilter === 'sunday') filtered = filtered.filter(s => s.sunday && !s.saturday);
+    else if (currentFilter === 'both') filtered = filtered.filter(s => s.saturday && s.sunday);
+    if (showStarredOnly) filtered = filtered.filter(s => starredIds.has(s.id));
+    return filtered;
+  }
+
+  const CAT_LABELS = { furniture:'🪑 Furniture', kids:'🧸 Kids', electronics:'📱 Electronics', clothing:'👕 Clothing', tools:'🔧 Tools', books:'📚 Books', sports:'⚽ Sports', antiques:'🏺 Antiques', misc:'📦 Misc' };
+  const CAT_SHORT = { furniture:'Furniture', kids:'Kids', electronics:'Electronics', clothing:'Clothing', tools:'Tools', books:'Books', sports:'Sports', antiques:'Antiques', misc:'Misc' };
+
+  function renderMarkers() {
+    markersLayer.clearLayers();
+    getFilteredSales().forEach(function(sale, idx) {
+      const isStarred = starredIds.has(sale.id);
+      const color = isStarred ? '#f5a623' : '#65c18b';
+      const borderColor = isStarred ? '#d4901d' : '#4da872';
+
+      const icon = L.divIcon({
+        html: '<div style="width:32px;height:32px;border-radius:50%;background:'+color+';border:2.5px solid '+borderColor+';color:white;font-weight:bold;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.3);font-family:system-ui;">'+(idx+1)+'</div>',
+        className: '', iconSize: [32,32], iconAnchor: [16,16]
+      });
+
+      const marker = L.marker([sale.lat, sale.lng], { icon: icon }).addTo(markersLayer);
+
+      const days = [];
+      if (sale.saturday) days.push('Sat');
+      if (sale.sunday) days.push('Sun');
+
+      const tagsHtml = sale.categories.map(c => '<span style="background:#e8f7ef;color:#4da872;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;display:inline-block;margin:1px;">'+(CAT_LABELS[c]||c)+'</span>').join(' ');
+      const phoneHtml = sale.ownerPhone ? '<p style="margin:3px 0;font-size:13px;color:#555;">📞 '+sale.ownerPhone+'</p>' : '';
+      const noteHtml = sale.notes ? '<div style="margin-top:8px;padding:8px;background:#f8faf9;border-radius:6px;font-size:12px;color:#666;font-style:italic;">"'+sale.notes+'"</div>' : '';
+      const owned = isOwner(sale);
+      const manageable = canManage(sale);
+      const adminManaging = !owned && isAdmin();
+
+      const popupActions = manageable
+        ? '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #eee;display:flex;gap:8px;">'+
+            '<button onclick="openEditModal(\''+sale.id+'\')" style="flex:1;padding:6px 0;background:#eff6ff;color:#3b82f6;border:1.5px solid #bfdbfe;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:system-ui;display:flex;align-items:center;justify-content:center;gap:4px;"><i class="fas fa-edit"></i> Edit</button>'+
+            '<button onclick="removeSale(\''+sale.id+'\')" style="flex:1;padding:6px 0;background:#fef2f2;color:#e74c3c;border:1.5px solid #fcc;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:system-ui;display:flex;align-items:center;justify-content:center;gap:4px;"><i class="fas fa-trash-alt"></i> Remove</button>'+
+          '</div>'
+        : '';
+
+      // Badge at top of popup
+      let popupBadge = '';
+      if (owned) popupBadge = '<div style="background:#fff3e0;color:#e67e22;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;margin-bottom:8px;display:inline-block;"><i class="fas fa-user-check"></i> Your Listing</div>';
+      else if (adminManaging) popupBadge = '<div style="background:#f3e8ff;color:#7c3aed;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;margin-bottom:8px;display:inline-block;"><i class="fas fa-shield-alt"></i> Admin Access</div>';
+
+      marker.bindPopup(
+        '<div style="font-family:system-ui;max-width:260px;">'+
+        popupBadge+
+        '<h3 style="font-size:15px;margin:0 0 6px;color:#2c3e50;">'+sale.ownerName+'\'s Sale</h3>'+
+        '<p style="margin:3px 0;font-size:13px;color:#555;">📍 '+sale.address+'</p>'+
+        '<p style="margin:3px 0;font-size:13px;color:#555;">📅 '+days.join(' & ')+'</p>'+
+        '<p style="margin:3px 0;font-size:13px;color:#555;">🕐 '+formatTime(sale.startTime)+' – '+formatTime(sale.endTime)+'</p>'+
+        (adminManaging ? '<p style="margin:3px 0;font-size:12px;color:#888;">📧 '+sale.ownerEmail+'</p>' : '')+
+        phoneHtml+
+        (tagsHtml ? '<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:3px;">'+tagsHtml+'</div>' : '')+
+        noteHtml+
+        popupActions+
+        '</div>',
+        { maxWidth: 280 }
+      );
+
+      marker._saleId = sale.id;
+    });
+  }
+
+  function renderListings() {
+    const panel = document.getElementById('listingsPanel');
+    const filtered = getFilteredSales();
+
+    if (!filtered.length) {
+      panel.innerHTML = '<div class="empty-state"><i class="fas fa-store-slash"></i><p>'+(showStarredOnly ? 'No starred sales yet.<br>Star some sales to plan your route!' : 'No sales listed yet.<br>Be the first to add yours!')+'</p></div>';
+      return;
+    }
+
+    panel.innerHTML = filtered.map(function(sale, idx) {
+      const days = [];
+      if (sale.saturday) days.push('Sat');
+      if (sale.sunday) days.push('Sun');
+      const owned = isOwner(sale);
+      const manageable = canManage(sale);
+      const adminManaging = !owned && isAdmin();
+      const starred = starredIds.has(sale.id);
+
+      const tagsHtml = sale.categories.slice(0,3).map(function(c){ return '<span class="listing-tag">'+(CAT_SHORT[c]||c)+'</span>'; }).join('') + (sale.categories.length > 3 ? '<span class="listing-tag">+' + (sale.categories.length-3) + '</span>' : '');
+
+      // Status tag
+      let statusTag = '';
+      if (owned) statusTag = '<span class="listing-owner-tag"><i class="fas fa-user-check"></i> Your listing</span>';
+      else if (adminManaging) statusTag = '<span class="listing-admin-tag"><i class="fas fa-shield-alt"></i> Admin access</span>';
+
+      // Action bar
+      const actionBar = manageable
+        ? '<div class="owner-actions">' +
+            '<button class="owner-action-btn edit-btn" onclick="event.stopPropagation();openEditModal(\''+sale.id+'\')"><i class="fas fa-edit"></i> Edit Listing</button>' +
+            '<button class="owner-action-btn delete-btn" onclick="event.stopPropagation();removeSale(\''+sale.id+'\')"><i class="fas fa-trash-alt"></i> Remove</button>' +
+          '</div>'
+        : '';
+
+      // CSS class
+      let itemClass = 'listing-item';
+      if (owned) itemClass += ' owned';
+      else if (adminManaging) itemClass += ' admin-managed';
+
+      return '<div class="'+itemClass+'" onclick="panToSale(\''+sale.id+'\')">'+
+        '<div class="listing-row">'+
+          '<div class="listing-num">'+(idx+1)+'</div>'+
+          '<div class="listing-info">'+
+            '<div class="listing-address">'+sale.address+'</div>'+
+            '<div class="listing-meta">'+
+              '<span><i class="fas fa-user"></i> '+sale.ownerName+'</span>'+
+              '<span><i class="fas fa-calendar"></i> '+days.join(' & ')+'</span>'+
+              '<span><i class="fas fa-clock"></i> '+formatTime(sale.startTime)+'–'+formatTime(sale.endTime)+'</span>'+
+            '</div>'+
+            '<div class="listing-tags">'+tagsHtml+statusTag+'</div>'+
+          '</div>'+
+          '<button class="listing-star-btn '+(starred?'starred':'')+'" onclick="event.stopPropagation();toggleStar(\''+sale.id+'\')" title="'+(starred?'Remove from route':'Add to route')+'"><i class="fas fa-star"></i></button>'+
+        '</div>'+
+        actionBar+
+      '</div>';
+    }).join('');
+  }
+
+  /* ====================== INTERACTIONS ====================== */
+  window.panToSale = function(id) {
+    const sale = sales.find(function(s){ return s.id === id; });
+    if (!sale) return;
+    map.setView([sale.lat, sale.lng], 17);
+    markersLayer.eachLayer(function(layer) {
+      if (layer._saleId === id) layer.openPopup();
+    });
+  };
+
+  window.toggleStar = function(id) {
+    if (starredIds.has(id)) starredIds.delete(id); else starredIds.add(id);
+    saveStars();
+    renderAll();
+  };
+
+  window.setFilter = function(filter, el) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-chip').forEach(function(c){ c.classList.remove('active'); });
+    el.classList.add('active');
+    renderAll();
+  };
+
+  window.toggleStarredFilter = function() {
+    showStarredOnly = !showStarredOnly;
+    document.getElementById('starFilterBtn').innerHTML = showStarredOnly ? '<i class="fas fa-list"></i> Show All' : '<i class="fas fa-star"></i> Show Starred';
+    renderAll();
+  };
+
+  /* ====================== ROUTE ====================== */
+  function updateRoutePanel() {
+    const panel = document.getElementById('routePanel');
+    const starred = sales.filter(function(s){ return starredIds.has(s.id); });
+    document.getElementById('starredCount').textContent = starred.length;
+    document.getElementById('routeStops').textContent = starred.length;
+
+    if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
+
+    if (starred.length >= 2) {
+      panel.classList.add('visible');
+      const points = starred.map(function(s){ return [s.lat, s.lng]; });
+      routeLine = L.polyline(points, { color:'#f5a623', weight:4, opacity:0.8, dashArray:'10,8' }).addTo(map);
+      let totalDist = 0;
+      for (let i = 0; i < points.length-1; i++) {
+        totalDist += map.distance(L.latLng(points[i]), L.latLng(points[i+1]));
+      }
+      const miles = totalDist / 1609.34;
+      document.getElementById('routeDistance').textContent = miles.toFixed(1);
+      document.getElementById('routeTime').textContent = Math.max(1, Math.round(miles * 2.5)) + ' min';
+    } else {
+      panel.classList.remove('visible');
+      document.getElementById('routeDistance').textContent = '--';
+      document.getElementById('routeTime').textContent = '--';
+    }
+  }
+
+  window.openInGoogleMaps = function() {
+    const starred = sales.filter(function(s){ return starredIds.has(s.id); });
+    if (starred.length < 2) return;
+    const waypoints = starred.map(function(s){ return encodeURIComponent(s.formattedAddress || s.address + ', Warwick, RI'); }).join('/');
+    window.open('https://www.google.com/maps/dir/' + waypoints, '_blank');
+  };
+
+  window.clearRoute = function() {
+    starredIds.clear();
+    saveStars();
+    renderAll();
+    showToast('Route cleared.', 'success');
+  };
+
+  /* ====================== COUNTDOWN ====================== */
+  window.openDateModal = function() { document.getElementById('dateModal').classList.add('show'); };
+  window.closeDateModal = function() { document.getElementById('dateModal').classList.remove('show'); };
+
+  window.setSaleDate = function() {
+    const val = document.getElementById('saleDateInput').value;
+    if (!val) { showToast('Please pick a date.', 'error'); return; }
+    saleDate = val;
+    localStorage.setItem(DATE_KEY, saleDate);
+    closeDateModal();
+    updateCountdown();
+    showToast('Sale date set!', 'success');
+  };
+
+  function updateCountdown() {
+    const display = document.getElementById('countdownDisplay');
+    if (!saleDate) {
+      display.innerHTML = '<button class="date-tbd" onclick="openDateModal()"><i class="fas fa-calendar-alt"></i> Set the Date — TBD</button>';
+      return;
+    }
+    const target = new Date(saleDate + 'T08:00:00');
+    const now = new Date();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      display.innerHTML = '<span style="font-weight:700;color:var(--accent);">🎉 SALE WEEKEND IS HERE! 🎉</span>';
+      return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const dateStr = target.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+
+    display.innerHTML =
+      '<span style="margin-right:6px;">' + dateStr + ' —</span>' +
+      '<span class="countdown-timer">' +
+        '<span class="countdown-unit">'+days+'<small>d</small></span>' +
+        '<span class="countdown-unit">'+hours+'<small>h</small></span>' +
+        '<span class="countdown-unit">'+mins+'<small>m</small></span>' +
+      '</span>' +
+      '<button class="date-tbd" onclick="openDateModal()" style="margin-left:12px;font-size:11px;padding:2px 10px;">Change</button>';
+  }
+
+  /* ====================== UTILS ====================== */
+  function formatTime(t) {
+    if (!t) return '';
+    var parts = t.split(':');
+    var h = parseInt(parts[0], 10);
+    var m = parseInt(parts[1], 10);
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    var hr = h % 12 || 12;
+    return hr + (m ? ':' + String(m).padStart(2,'0') : '') + ' ' + ampm;
+  }
+
+  function saveSales() { localStorage.setItem(SALES_KEY, JSON.stringify(sales)); }
+  function saveStars() { localStorage.setItem(STARS_KEY, JSON.stringify([...starredIds])); }
+
+  function updateStats() {
+    document.getElementById('totalSales').textContent = sales.length;
+    document.getElementById('listCount').textContent = getFilteredSales().length;
+  }
+
+  function showToast(msg, type) {
+    type = type || 'success';
+    var toast = document.getElementById('toast');
+    var icon = toast.querySelector('i');
+    document.getElementById('toastMsg').textContent = msg;
+    icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+    toast.className = 'toast ' + type + ' show';
+    setTimeout(function(){ toast.classList.remove('show'); }, 3500);
+  }
+
+  /* ====================== START ====================== */
+  initMap();
+  setInterval(updateCountdown, 60000);
+})();
+</script>
+</body>
+</html>
