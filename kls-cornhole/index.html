@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLS Cornhole Classic | Kimball Lake Shores</title>
+<meta name="description" content="The official home of the Kimball Lake Shores Cornhole Classic — a legendary double-elimination tournament since 2020.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   ROOT & RESET
+   ═══════════════════════════════════════════════ */
+:root {
+  --gold: #D4A843;
+  --gold-light: #F0D078;
+  --gold-dark: #A07C2E;
+  --dark-bg: #0A0A0F;
+  --dark-card: #111118;
+  --dark-surface: #1A1A24;
+  --dark-border: #2A2A3A;
+  --text-primary: #F0F0F5;
+  --text-secondary: #9A9AB0;
+  --text-muted: #6A6A80;
+  --accent-red: #C0392B;
+  --accent-blue: #2C3E80;
+  --gradient-gold: linear-gradient(135deg, #D4A843, #F0D078, #D4A843);
+  --gradient-dark: linear-gradient(180deg, #0A0A0F 0%, #12121C 100%);
+  --shadow-gold: 0 0 30px rgba(212, 168, 67, 0.15);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --font-display: 'Oswald', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+  --font-accent: 'Playfair Display', serif;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+a { color: var(--gold); text-decoration: none; }
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 168, 67, 0.15);
+  transition: all 0.3s ease;
+}
+nav.scrolled { background: rgba(10, 10, 15, 0.98); }
+.nav-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 2rem;
+}
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 3px;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold); transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); transition: 0.3s; }
+
+/* ═══════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 30%, rgba(212, 168, 67, 0.06) 0%, transparent 60%),
+              var(--gradient-dark);
+  padding: 2rem;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A843' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+.hero-content { position: relative; z-index: 1; }
+
+.trophy-icon {
+  width: 120px; height: 120px; margin: 0 auto 2rem;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.trophy-icon svg { width: 100%; height: 100%; }
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: 0.9rem; font-weight: 300;
+  text-transform: uppercase; letter-spacing: 6px;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.hero-title .gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-tagline {
+  font-family: var(--font-accent);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-style: italic; font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+.hero-meta {
+  display: flex; gap: 2rem; justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+.hero-meta-item {
+  text-align: center;
+}
+.hero-meta-item .number {
+  font-family: var(--font-display);
+  font-size: 2.5rem; font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.hero-meta-item .label {
+  font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--text-muted);
+}
+.hero-cta {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 3px;
+  padding: 1rem 2.5rem;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.hero-cta:hover {
+  background: var(--gold);
+  color: var(--dark-bg);
+}
+.scroll-indicator {
+  position: absolute; bottom: 2rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+.scroll-indicator svg { width: 24px; height: 24px; fill: var(--text-muted); }
+
+/* ═══════════════════════════════════════════════
+   SECTION COMMON
+   ═══════════════════════════════════════════════ */
+section { padding: 6rem 2rem; }
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.section-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.section-divider {
+  width: 60px; height: 3px;
+  background: var(--gradient-gold);
+  margin: 1.5rem auto 0;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* ═══════════════════════════════════════════════
+   TIMELINE - CHAMPIONSHIP HISTORY
+   ═══════════════════════════════════════════════ */
+#history { background: var(--dark-bg); }
+
+.year-group { margin-bottom: 4rem; }
+.year-label {
+  font-family: var(--font-display);
+  font-size: 4rem; font-weight: 700;
+  color: rgba(212, 168, 67, 0.1);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+}
+.championships-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.champ-card {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: default;
+}
+.champ-card:hover {
+  border-color: rgba(212, 168, 67, 0.3);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-4px);
+}
+.champ-card-img {
+  width: 100%; height: 260px;
+  object-fit: cover;
+  object-position: top center;
+  filter: saturate(0.85);
+  transition: filter 0.4s;
+}
+.champ-card:hover .champ-card-img { filter: saturate(1.1); }
+.champ-card-body { padding: 1.25rem; }
+.champ-card-event {
+  font-family: var(--font-display);
+  font-size: 0.7rem; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.champ-card-names {
+  font-family: var(--font-display);
+  font-size: 1.3rem; font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.champ-card-names .ampersand {
+  color: var(--gold); font-weight: 300;
+  font-family: var(--font-accent);
+  font-style: italic;
+}
+.no-photo {
+  width: 100%; height: 260px;
+  background: linear-gradient(135deg, var(--dark-surface), var(--dark-card));
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.no-photo::before {
+  content: '🏆';
+  font-size: 4rem;
+  opacity: 0.15;
+}
+
+/* ═══════════════════════════════════════════════
+   LEADERBOARD
+   ═══════════════════════════════════════════════ */
+#leaderboard {
+  background: var(--dark-card);
+  border-top: 1px solid var(--dark-border);
+  border-bottom: 1px solid var(--dark-border);
+}
+.leaderboard-table {
+  width: 100%; max-width: 900px; margin: 0 auto;
+  border-collapse: collapse;
+}
+.leaderboard-table thead th {
+  font-family: var(--font-display);
+  font-size: 0.75rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 3px;
+  color: var(--text-muted);
+  padding: 1rem; text-align: left;
+  border-bottom: 2px solid var(--dark-border);
+}
+.leaderboard-table thead th:last-child { text-align: center; }
+.leaderboard-table tbody tr {
+  border-bottom: 1px solid rgba(42, 42, 58, 0.5);
+  transition: background 0.3s;
+}
+.leaderboard-table tbody tr:hover {
+  background: rgba(212, 168, 67, 0.04);
+}
+.leaderboard-table td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+.lb-rank {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--text-muted);
+  width: 60px;
+}
+.lb-rank.gold { color: var(--gold); }
+.lb-rank.silver { color: #C0C0C0; }
+.lb-rank.bronze { color: #CD7F32; }
+.lb-player-info { display: flex; align-items: center; gap: 1rem; }
+.lb-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--dark-surface);
+  border: 2px solid var(--dark-border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.lb-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 600;
+  text-transform: uppercase;
+}
+.lb-hometown {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.lb-wins {
+  text-align: center;
+}
+.lb-wins-count {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.lb-wins-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+.lb-trophies {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+/* ═══════════════════════════════════════════════
+   PLAYER CARDS
+   ═══════════════════════════════════════════════ */
+#players { background: var(--dark-bg); }
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.player-card {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.player-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient-gold);
+  transform: scaleX(0);
+  transition: transform 0.4s;
+}
+.player-card:hover::before { transform: scaleX(1); }
+.player-card:hover {
+  border-color: rgba(212, 168, 67, 0.2);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-gold);
+}
+.pc-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--dark-surface);
+  border: 3px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--gold);
+}
+.pc-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.pc-hometown {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.pc-stats { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; }
+.pc-stat-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem; font-weight: 700;
+  color: var(--gold); line-height: 1;
+}
+.pc-stat-label {
+  font-size: 0.65rem; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--text-muted);
+}
+.pc-titles {
+  list-style: none; text-align: left;
+  border-top: 1px solid var(--dark-border);
+  padding-top: 1rem;
+}
+.pc-titles li {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: 0.25rem 0;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.pc-titles li::before {
+  content: '🏆';
+  font-size: 0.7rem;
+}
+
+/* ═══════════════════════════════════════════════
+   STATS & RECORDS
+   ═══════════════════════════════════════════════ */
+#stats {
+  background: var(--dark-card);
+  border-top: 1px solid var(--dark-border);
+  border-bottom: 1px solid var(--dark-border);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.stat-card {
+  background: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: all 0.3s;
+}
+.stat-card:hover {
+  border-color: rgba(212, 168, 67, 0.2);
+}
+.stat-card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+.stat-card-title {
+  font-family: var(--font-display);
+  font-size: 0.75rem; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.stat-card-value {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.stat-card-detail {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════
+   PHOTO GALLERY
+   ═══════════════════════════════════════════════ */
+#gallery { background: var(--dark-bg); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.5rem;
+}
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  aspect-ratio: 4/3;
+}
+.gallery-item.portrait { aspect-ratio: 3/4; grid-row: span 2; }
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s, filter 0.5s;
+  filter: saturate(0.8) brightness(0.9);
+}
+.gallery-item:hover img {
+  transform: scale(1.05);
+  filter: saturate(1) brightness(1);
+}
+.gallery-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  padding: 2rem 1rem 1rem;
+  transform: translateY(100%);
+  transition: transform 0.4s;
+}
+.gallery-item:hover .gallery-overlay { transform: translateY(0); }
+.gallery-overlay-title {
+  font-family: var(--font-display);
+  font-size: 0.9rem; font-weight: 600;
+  text-transform: uppercase;
+}
+.gallery-overlay-sub {
+  font-size: 0.75rem; color: var(--text-muted);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 2000;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 2rem;
+}
+.lightbox.active { display: flex; }
+.lightbox img {
+  max-width: 90vw; max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: none; border: none;
+  color: white; font-size: 2rem; cursor: pointer;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+}
+.lightbox-caption {
+  position: absolute; bottom: 1.5rem; left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--dark-border);
+  background: var(--dark-bg);
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 0.9rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 4px;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+.footer-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════ */
+.fade-in {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(10, 10, 15, 0.98);
+    padding: 1rem 2rem 2rem;
+    gap: 1rem;
+    border-bottom: 1px solid var(--dark-border);
+  }
+  .hamburger { display: flex; }
+  .hero-meta { gap: 1.5rem; }
+  .championships-row { grid-template-columns: 1fr; }
+  .players-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  section { padding: 4rem 1.25rem; }
+  .year-label { font-size: 3rem; }
+  .leaderboard-table { font-size: 0.9rem; }
+  .lb-hometown { display: none; }
+}
+@media (max-width: 480px) {
+  .players-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand">KLS Cornhole Classic</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#history">Championships</a></li>
+      <li><a href="#leaderboard">Leaderboard</a></li>
+      <li><a href="#players">Players</a></li>
+      <li><a href="#stats">Records</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="trophy-icon">
+      <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#D4A843"/>
+            <stop offset="50%" stop-color="#F0D078"/>
+            <stop offset="100%" stop-color="#D4A843"/>
+          </linearGradient>
+        </defs>
+        <!-- Cup body -->
+        <path d="M25 10 h50 v5 c0 30 -5 50 -25 60 c-20-10-25-30-25-60 z" fill="url(#goldGrad)" opacity="0.9"/>
+        <!-- Left handle -->
+        <path d="M25 20 C10 20, 5 35, 18 45" stroke="url(#goldGrad)" stroke-width="4" fill="none"/>
+        <!-- Right handle -->
+        <path d="M75 20 C90 20, 95 35, 82 45" stroke="url(#goldGrad)" stroke-width="4" fill="none"/>
+        <!-- Stem -->
+        <rect x="45" y="75" width="10" height="20" fill="url(#goldGrad)" opacity="0.8"/>
+        <!-- Base -->
+        <ellipse cx="50" cy="100" rx="22" ry="6" fill="url(#goldGrad)" opacity="0.7"/>
+        <!-- Star on cup -->
+        <polygon points="50,22 53,30 61,30 55,35 57,43 50,38 43,43 45,35 39,30 47,30" fill="#0A0A0F" opacity="0.3"/>
+        <!-- Rim shine -->
+        <line x1="28" y1="12" x2="72" y2="12" stroke="#F0D078" stroke-width="1.5" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="hero-subtitle">Kimball Lake Shores</div>
+    <h1 class="hero-title">
+      <span class="gold">Cornhole</span><br>Classic
+    </h1>
+    <p class="hero-tagline">"Where Legends Are Made on the Sand"</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="number">7</div>
+        <div class="label">Seasons</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="number">16</div>
+        <div class="label">Tournaments</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="number">2020</div>
+        <div class="label">Est.</div>
+      </div>
+    </div>
+    <a href="#history" class="hero-cta">View Champions</a>
+  </div>
+  <div class="scroll-indicator">
+    <svg viewBox="0 0 24 24"><path d="M12 16l-6-6h12z"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════ CHAMPIONSHIP HISTORY ═══════════ -->
+<section id="history">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-eyebrow">Since 2020</div>
+      <h2 class="section-title">Championship History</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <!-- 2026 -->
+    <div class="year-group fade-in">
+      <div class="year-label">2026</div>
+      <div class="championships-row">
+        <div class="champ-card">
+          <div class="no-photo" style="position:relative"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:0.8rem;font-family:var(--font-display);text-transform:uppercase;letter-spacing:3px;color:var(--gold);opacity:0.6">May 23</span></div>
+          <div class="champ-card-body">
+            <div class="champ-card-event">Memorial Day 2026</div>
+            <div class="champ-card-names" style="color:var(--text-muted);font-size:1rem;">Coming Soon</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <div class="no-photo" style="position:relative;overflow:hidden;background:#fff;">
+            <svg viewBox="0 0 494 260" style="position:absolute;top:0;left:0;width:100%;height:100%;" preserveAspectRatio="xMidYMid slice">
+              <!-- 13 stripes -->
+              <rect width="494" height="20" y="0" fill="#BF0A30"/>
+              <rect width="494" height="20" y="20" fill="#fff"/>
+              <rect width="494" height="20" y="40" fill="#BF0A30"/>
+              <rect width="494" height="20" y="60" fill="#fff"/>
+              <rect width="494" height="20" y="80" fill="#BF0A30"/>
+              <rect width="494" height="20" y="100" fill="#fff"/>
+              <rect width="494" height="20" y="120" fill="#BF0A30"/>
+              <rect width="494" height="20" y="140" fill="#fff"/>
+              <rect width="494" height="20" y="160" fill="#BF0A30"/>
+              <rect width="494" height="20" y="180" fill="#fff"/>
+              <rect width="494" height="20" y="200" fill="#BF0A30"/>
+              <rect width="494" height="20" y="220" fill="#fff"/>
+              <rect width="494" height="20" y="240" fill="#BF0A30"/>
+              <!-- Blue canton -->
+              <rect width="198" height="140" fill="#002868"/>
+              <!-- Stars (simplified 5 rows) -->
+              <g fill="#fff" font-size="12" font-family="serif">
+                <text x="18" y="24">&#9733;</text><text x="50" y="24">&#9733;</text><text x="82" y="24">&#9733;</text><text x="114" y="24">&#9733;</text><text x="146" y="24">&#9733;</text><text x="178" y="24">&#9733;</text>
+                <text x="34" y="48">&#9733;</text><text x="66" y="48">&#9733;</text><text x="98" y="48">&#9733;</text><text x="130" y="48">&#9733;</text><text x="162" y="48">&#9733;</text>
+                <text x="18" y="72">&#9733;</text><text x="50" y="72">&#9733;</text><text x="82" y="72">&#9733;</text><text x="114" y="72">&#9733;</text><text x="146" y="72">&#9733;</text><text x="178" y="72">&#9733;</text>
+                <text x="34" y="96">&#9733;</text><text x="66" y="96">&#9733;</text><text x="98" y="96">&#9733;</text><text x="130" y="96">&#9733;</text><text x="162" y="96">&#9733;</text>
+                <text x="18" y="120">&#9733;</text><text x="50" y="120">&#9733;</text><text x="82" y="120">&#9733;</text><text x="114" y="120">&#9733;</text><text x="146" y="120">&#9733;</text><text x="178" y="120">&#9733;</text>
+              </g>
+              <!-- Overlay to darken slightly -->
+              <rect width="494" height="260" fill="rgba(0,0,0,0.25)"/>
+            </svg>
+            <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;font-family:var(--font-display);text-transform:uppercase;letter-spacing:4px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.7),0 0 30px rgba(0,0,0,0.5)">July 4</span>
+          </div>
+          <div class="champ-card-body">
+            <div class="champ-card-event">Fourth of July 2026</div>
+            <div class="champ-card-names" style="color:var(--text-muted);font-size:1rem;">Coming Soon</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <div class="no-photo" style="position:relative"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:0.8rem;font-family:var(--font-display);text-transform:uppercase;letter-spacing:3px;color:var(--gold);opacity:0.6">Sept 5</span></div>
+          <div class="champ-card-body">
+            <div class="champ-card-event">Labor Day 2026</div>
+            <div class="champ-card-names" style="color:var(--text-muted);font-size:1rem;">Coming Soon</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="year-group fade-in">
+      <div class="year-label">2025</div>
+      <div class="championships-row">
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2025-labor-day.jpg" alt="2025 Labor Day Champions" loading="lazy" style="object-position:center 15%">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Labor Day 2025</div>
+            <div class="champ-card-names">Joe Sullivan <span class="ampersand">&</span> Steve Alward</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2025-4th-july.jpg" alt="2025 Fourth of July Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Fourth of July 2025</div>
+            <div class="champ-card-names">Mike Hersey <span class="ampersand">&</span> Dan Hersey</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2025-memorial-day.jpg" alt="2025 Memorial Day Champions" loading="lazy" style="object-position:center 40%">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Memorial Day 2025</div>
+            <div class="champ-card-names">Steve Alward <span class="ampersand">&</span> Joey Kiedaisch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2024 -->
+    <div class="year-group fade-in">
+      <div class="year-label">2024</div>
+      <div class="championships-row">
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2024-labor-day.jpg" alt="2024 Labor Day Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Labor Day 2024</div>
+            <div class="champ-card-names">Ian O'Rourke <span class="ampersand">&</span> Joe Surace</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2024-4th-july.jpg" alt="2024 Fourth of July Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Fourth of July 2024</div>
+            <div class="champ-card-names">Mike Hersey <span class="ampersand">&</span> Louie Grasso</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2024-memorial-day.jpg" alt="2024 Memorial Day Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Memorial Day 2024</div>
+            <div class="champ-card-names">Joe Sullivan <span class="ampersand">&</span> Vinny Kiedaisch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2023 -->
+    <div class="year-group fade-in">
+      <div class="year-label">2023</div>
+      <div class="championships-row">
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2023-labor-day.jpg" alt="2023 Labor Day Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Labor Day 2023</div>
+            <div class="champ-card-names">Mike Hersey <span class="ampersand">&</span> Liam</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2023-4th-july.jpg" alt="2023 Fourth of July Champions" loading="lazy" style="object-position:center 20%">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Fourth of July 2023</div>
+            <div class="champ-card-names">Louie Grasso <span class="ampersand">&</span> Dan Hersey</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2023-memorial-day.jpg" alt="2023 Memorial Day Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Memorial Day 2023</div>
+            <div class="champ-card-names">Celia Hersey <span class="ampersand">&</span> Joey Kiedaisch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2022 -->
+    <div class="year-group fade-in">
+      <div class="year-label">2022</div>
+      <div class="championships-row">
+        <div class="champ-card">
+          <div class="no-photo"></div>
+          <div class="champ-card-body">
+            <div class="champ-card-event">Labor Day 2022</div>
+            <div class="champ-card-names">Mike Hersey <span class="ampersand">&</span> Dustin</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2022-4th-july.jpg" alt="2022 Fourth of July Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Fourth of July 2022</div>
+            <div class="champ-card-names">Dawn Grasso <span class="ampersand">&</span> Greg West</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2022-memorial-day.jpg" alt="2022 Memorial Day Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Memorial Day 2022</div>
+            <div class="champ-card-names">Joey Kiedaisch <span class="ampersand">&</span> Steve Martel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2021 -->
+    <div class="year-group fade-in">
+      <div class="year-label">2021</div>
+      <div class="championships-row">
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2021-labor-day.jpg" alt="2021 Labor Day Champions" loading="lazy" style="object-position:center 35%">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Labor Day 2021</div>
+            <div class="champ-card-names">Cassie Grasso <span class="ampersand">&</span> Ian O'Rourke</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2021-4th-july.jpg" alt="2021 Fourth of July Champions" loading="lazy" style="object-position:center">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Fourth of July 2021</div>
+            <div class="champ-card-names">Joey Kiedaisch <span class="ampersand">&</span> Dan Hersey</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2020 -->
+    <div class="year-group fade-in">
+      <div class="year-label">2020</div>
+      <div class="championships-row">
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2020-labor-day.jpg" alt="2020 Labor Day Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Labor Day 2020</div>
+            <div class="champ-card-names">Joey Kiedaisch <span class="ampersand">&</span> PJ</div>
+          </div>
+        </div>
+        <div class="champ-card">
+          <img class="champ-card-img" src="photos/2020-4th-july.jpg" alt="2020 Fourth of July Champions" loading="lazy">
+          <div class="champ-card-body">
+            <div class="champ-card-event">Fourth of July 2020</div>
+            <div class="champ-card-names">Ian O'Rourke <span class="ampersand">&</span> Louie Grasso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ LEADERBOARD ═══════════ -->
+<section id="leaderboard">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-eyebrow">All-Time</div>
+      <h2 class="section-title">Win Leaderboard</h2>
+      <div class="section-divider"></div>
+    </div>
+    <table class="leaderboard-table fade-in">
+      <thead>
+        <tr>
+          <th style="width:60px;">#</th>
+          <th>Player</th>
+          <th style="text-align:center;">Titles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="lb-rank gold">1</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">JK</div>
+              <div>
+                <div class="lb-name">Joey Kiedaisch</div>
+                <div class="lb-hometown">Westminster, MA</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">5</div>
+            <div class="lb-trophies">🏆🏆🏆🏆🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank silver">2</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">MH</div>
+              <div>
+                <div class="lb-name">Mike Hersey</div>
+                <div class="lb-hometown">Brooklyn, CT</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">4</div>
+            <div class="lb-trophies">🏆🏆🏆🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank bronze">3</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">DH</div>
+              <div>
+                <div class="lb-name">Dan Hersey</div>
+                <div class="lb-hometown">Warwick, RI</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">3</div>
+            <div class="lb-trophies">🏆🏆🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank bronze">3</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">IO</div>
+              <div>
+                <div class="lb-name">Ian O'Rourke</div>
+                <div class="lb-hometown">Peabody, MA</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">3</div>
+            <div class="lb-trophies">🏆🏆🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank bronze">3</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">LG</div>
+              <div>
+                <div class="lb-name">Louie Grasso</div>
+                <div class="lb-hometown">Wilmington, MA</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">3</div>
+            <div class="lb-trophies">🏆🏆🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank">6</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">JS</div>
+              <div>
+                <div class="lb-name">Joe Sullivan</div>
+                <div class="lb-hometown">Millis, MA</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">2</div>
+            <div class="lb-trophies">🏆🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank">6</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">SA</div>
+              <div>
+                <div class="lb-name">Steve Alward</div>
+                <div class="lb-hometown">Norwell, MA</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">2</div>
+            <div class="lb-trophies">🏆🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank">8</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">CG</div>
+              <div>
+                <div class="lb-name">Cassie Grasso</div>
+                <div class="lb-hometown">Wilmington, MA</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">1</div>
+            <div class="lb-trophies">🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank">8</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">CH</div>
+              <div>
+                <div class="lb-name">Celia Hersey</div>
+                <div class="lb-hometown">Brooklyn, CT</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">1</div>
+            <div class="lb-trophies">🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank">8</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">DG</div>
+              <div>
+                <div class="lb-name">Dawn Grasso</div>
+                <div class="lb-hometown">Wilmington, MA</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">1</div>
+            <div class="lb-trophies">🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank">8</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">GW</div>
+              <div>
+                <div class="lb-name">Greg West</div>
+                <div class="lb-hometown">Billerica, MA</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">1</div>
+            <div class="lb-trophies">🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank">8</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">JS</div>
+              <div>
+                <div class="lb-name">Joe Surace</div>
+                <div class="lb-hometown">West Islip, NY</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">1</div>
+            <div class="lb-trophies">🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank">8</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">SM</div>
+              <div>
+                <div class="lb-name">Steve Martel</div>
+                <div class="lb-hometown">Barrington, RI</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">1</div>
+            <div class="lb-trophies">🏆</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="lb-rank">8</span></td>
+          <td>
+            <div class="lb-player-info">
+              <div class="lb-avatar">VK</div>
+              <div>
+                <div class="lb-name">Vinny Kiedaisch</div>
+                <div class="lb-hometown">Westminster, MA</div>
+              </div>
+            </div>
+          </td>
+          <td class="lb-wins">
+            <div class="lb-wins-count">1</div>
+            <div class="lb-trophies">🏆</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════ PLAYER CARDS ═══════════ -->
+<section id="players">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-eyebrow">Hall of Champions</div>
+      <h2 class="section-title">Player Cards</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="players-grid">
+
+      <!-- 5 Titles -->
+      <div class="player-card fade-in">
+        <div class="pc-avatar">JK</div>
+        <div class="pc-name">Joey Kiedaisch</div>
+        <div class="pc-hometown">Westminster, MA</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">5</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Memorial Day 2025</li>
+          <li>Memorial Day 2023</li>
+          <li>Memorial Day 2022</li>
+          <li>Fourth of July 2021</li>
+          <li>Labor Day 2020</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">MH</div>
+        <div class="pc-name">Mike Hersey</div>
+        <div class="pc-hometown">Brooklyn, CT · Born in England</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">4</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Fourth of July 2025</li>
+          <li>Fourth of July 2024</li>
+          <li>Labor Day 2023</li>
+          <li>Labor Day 2022</li>
+        </ul>
+      </div>
+
+      <!-- 3 Titles -->
+      <div class="player-card fade-in">
+        <div class="pc-avatar">DH</div>
+        <div class="pc-name">Dan Hersey</div>
+        <div class="pc-hometown">Warwick, RI</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">3</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Fourth of July 2025</li>
+          <li>Fourth of July 2023</li>
+          <li>Fourth of July 2021</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">IO</div>
+        <div class="pc-name">Ian O'Rourke</div>
+        <div class="pc-hometown">Peabody, MA</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">3</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Labor Day 2024</li>
+          <li>Labor Day 2021</li>
+          <li>Fourth of July 2020</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">LG</div>
+        <div class="pc-name">Louie Grasso</div>
+        <div class="pc-hometown">Wilmington, MA</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">3</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Fourth of July 2024</li>
+          <li>Fourth of July 2023</li>
+          <li>Fourth of July 2020</li>
+        </ul>
+      </div>
+
+      <!-- 2 Titles -->
+      <div class="player-card fade-in">
+        <div class="pc-avatar">JS</div>
+        <div class="pc-name">Joe Sullivan</div>
+        <div class="pc-hometown">Millis, MA</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">2</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Labor Day 2025</li>
+          <li>Memorial Day 2024</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">SA</div>
+        <div class="pc-name">Steve Alward</div>
+        <div class="pc-hometown">Norwell, MA</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">2</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Labor Day 2025</li>
+          <li>Memorial Day 2025</li>
+        </ul>
+      </div>
+
+      <!-- 1 Title -->
+      <div class="player-card fade-in">
+        <div class="pc-avatar">CG</div>
+        <div class="pc-name">Cassie Grasso</div>
+        <div class="pc-hometown">Wilmington, MA</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">1</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Labor Day 2021</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">CH</div>
+        <div class="pc-name">Celia Hersey</div>
+        <div class="pc-hometown">Brooklyn, CT</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">1</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Memorial Day 2023</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">DG</div>
+        <div class="pc-name">Dawn Grasso</div>
+        <div class="pc-hometown">Wilmington, MA</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">1</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Fourth of July 2022</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">GW</div>
+        <div class="pc-name">Greg West</div>
+        <div class="pc-hometown">Billerica, MA</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">1</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Fourth of July 2022</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">JS</div>
+        <div class="pc-name">Joe Surace</div>
+        <div class="pc-hometown">West Islip, NY</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">1</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Labor Day 2024</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">SM</div>
+        <div class="pc-name">Steve Martel</div>
+        <div class="pc-hometown">Barrington, RI</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">1</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Memorial Day 2022</li>
+        </ul>
+      </div>
+
+      <div class="player-card fade-in">
+        <div class="pc-avatar">VK</div>
+        <div class="pc-name">Vinny Kiedaisch</div>
+        <div class="pc-hometown">Westminster, MA</div>
+        <div class="pc-stats">
+          <div><div class="pc-stat-num">1</div><div class="pc-stat-label">Titles</div></div>
+        </div>
+        <ul class="pc-titles">
+          <li>Memorial Day 2024</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STATS & RECORDS ═══════════ -->
+<section id="stats">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-eyebrow">By The Numbers</div>
+      <h2 class="section-title">Stats & Records</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="stats-grid">
+
+      <div class="stat-card fade-in">
+        <div class="stat-card-icon">👑</div>
+        <div class="stat-card-title">The GOAT</div>
+        <div class="stat-card-value">Joey Kiedaisch — 5 Titles</div>
+        <div class="stat-card-detail">The all-time leader with 5 championships. Joey dominated the early years and keeps adding to his legacy. Mike Hersey is right behind with 4.</div>
+      </div>
+
+      <div class="stat-card fade-in">
+        <div class="stat-card-icon">🔥</div>
+        <div class="stat-card-title">Mr. Fourth of July</div>
+        <div class="stat-card-value">Dan Hersey</div>
+        <div class="stat-card-detail">All 3 of Dan's titles have come on Independence Day — 2021, 2023, and 2025. The undisputed king of the Fourth.</div>
+      </div>
+
+      <div class="stat-card fade-in">
+        <div class="stat-card-icon">🎆</div>
+        <div class="stat-card-title">Fourth of July Specialist</div>
+        <div class="stat-card-value">Louie Grasso</div>
+        <div class="stat-card-detail">All 3 of Louie's titles also came on the Fourth — 2020, 2023, and 2024. Two players, same holiday dominance.</div>
+      </div>
+
+      <div class="stat-card fade-in">
+        <div class="stat-card-icon">💪</div>
+        <div class="stat-card-title">Labor Day King</div>
+        <div class="stat-card-value">Mike Hersey & Ian O'Rourke</div>
+        <div class="stat-card-detail">Both have 2 Labor Day titles. Mike won 2022 & 2023, Ian won 2021 & 2024. Nobody owns Monday quite like these two.</div>
+      </div>
+
+      <div class="stat-card fade-in">
+        <div class="stat-card-icon">👨‍👦</div>
+        <div class="stat-card-title">Family Affair</div>
+        <div class="stat-card-value">Mike & Dan Hersey</div>
+        <div class="stat-card-detail">Father-in-law and son-in-law teamed up to take the Fourth of July 2025 title — the first family pair to share a championship.</div>
+      </div>
+
+      <div class="stat-card fade-in">
+        <div class="stat-card-icon">👪</div>
+        <div class="stat-card-title">Hersey Dynasty</div>
+        <div class="stat-card-value">8 titles across 3 family members</div>
+        <div class="stat-card-detail">Mike (4), wife Celia (1), and son-in-law Dan (3) combine for 8 championship titles — the most dominant family in KLS history.</div>
+      </div>
+
+      <div class="stat-card fade-in">
+        <div class="stat-card-icon">🏘️</div>
+        <div class="stat-card-title">Grasso Household</div>
+        <div class="stat-card-value">5 titles across 3 family members</div>
+        <div class="stat-card-detail">Louie (3), Cassie (1), and Dawn (1) represent Wilmington, MA well with 5 combined championships.</div>
+      </div>
+
+      <div class="stat-card fade-in">
+        <div class="stat-card-icon">🗺️</div>
+        <div class="stat-card-title">Massachusetts Dominance</div>
+        <div class="stat-card-value">~60% of titles</div>
+        <div class="stat-card-detail">Players from the Bay State — Westminster, Wilmington, Peabody, Billerica, Norwell — have claimed the lion's share of championships.</div>
+      </div>
+
+      <div class="stat-card fade-in">
+        <div class="stat-card-icon">🎲</div>
+        <div class="stat-card-title">Random Draw Magic</div>
+        <div class="stat-card-value">0 repeat pairings*</div>
+        <div class="stat-card-detail">With randomly drawn teams, no championship-winning duo has won together twice — every title goes to a unique pairing. (*pending full records)</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-eyebrow">Moments</div>
+      <h2 class="section-title">Photo Gallery</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="gallery-grid fade-in" id="galleryGrid">
+      <!-- Gallery items injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ LIGHTBOX ═══════════ -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-logo">KLS Cornhole Classic</div>
+  <p class="footer-sub">Kimball Lake Shores · Fryeburg, Maine · Est. 2020</p>
+  <p class="footer-sub" style="margin-top:0.5rem; color: var(--text-muted); font-size: 0.7rem;">Double Elimination · Randomly Drawn Teams · One Stanley Cup-Style Trophy</p>
+</footer>
+
+<script>
+// ═══════════ DATA ═══════════
+const galleryData = [
+  { src: 'photos/2025-labor-day.jpg', title: 'Joe Sullivan & Steve Alward', sub: 'Labor Day 2025', portrait: true },
+  { src: 'photos/2025-4th-july.jpg', title: 'Mike & Dan Hersey', sub: 'Fourth of July 2025', portrait: true },
+  { src: 'photos/2025-memorial-day.jpg', title: 'Steve Alward & Joey Kiedaisch', sub: 'Memorial Day 2025', portrait: true },
+  { src: 'photos/2024-labor-day.jpg', title: "Ian O'Rourke & Joe Surace", sub: 'Labor Day 2024', portrait: false },
+  { src: 'photos/2024-memorial-day.jpg', title: 'Joe Sullivan & Vinny Kiedaisch', sub: 'Memorial Day 2024', portrait: true },
+  { src: 'photos/2023-4th-july.jpg', title: 'Louie Grasso & Dan Hersey', sub: 'Fourth of July 2023', portrait: true },
+  { src: 'photos/2023-memorial-day.jpg', title: 'Celia Hersey & Joey Kiedaisch', sub: 'Memorial Day 2023', portrait: false },
+  { src: 'photos/2023-labor-day.jpg', title: 'Mike Hersey & Liam', sub: 'Labor Day 2023', portrait: true },
+  { src: 'photos/2024-4th-july.jpg', title: 'Mike Hersey & Louie Grasso', sub: 'Fourth of July 2024', portrait: true },
+  { src: 'photos/2022-4th-july.jpg', title: 'Dawn Grasso & Greg West', sub: 'Fourth of July 2022', portrait: true },
+  { src: 'photos/2022-memorial-day.jpg', title: 'Joey Kiedaisch & Steve Martel', sub: 'Memorial Day 2022', portrait: false },
+  { src: 'photos/2021-labor-day.jpg', title: "Cassie Grasso & Ian O'Rourke", sub: 'Labor Day 2021', portrait: true },
+  { src: 'photos/2021-4th-july.jpg', title: 'Joey Kiedaisch & Dan Hersey', sub: 'Fourth of July 2021', portrait: false },
+  { src: 'photos/2020-labor-day.jpg', title: 'Joey Kiedaisch & PJ', sub: 'Labor Day 2020', portrait: false },
+  { src: 'photos/2020-4th-july.jpg', title: "Ian O'Rourke & Louie Grasso", sub: 'Fourth of July 2020', portrait: false },
+];
+
+// ═══════════ GALLERY RENDER ═══════════
+const galleryGrid = document.getElementById('galleryGrid');
+galleryData.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.className = 'gallery-item' + (item.portrait ? ' portrait' : '');
+  div.innerHTML = `
+    <img src="${item.src}" alt="${item.title}" loading="lazy">
+    <div class="gallery-overlay">
+      <div class="gallery-overlay-title">${item.title}</div>
+      <div class="gallery-overlay-sub">${item.sub}</div>
+    </div>
+  `;
+  div.addEventListener('click', () => openLightbox(item.src, item.title + ' — ' + item.sub));
+  galleryGrid.appendChild(div);
+});
+
+// ═══════════ LIGHTBOX ═══════════
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxClose = document.getElementById('lightboxClose');
+
+function openLightbox(src, caption) {
+  lightboxImg.src = src;
+  lightboxCaption.textContent = caption;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+// ═══════════ SCROLL ANIMATIONS ═══════════
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ═══════════ NAV ═══════════
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Active nav highlight
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (scrollY >= sectionTop) current = section.getAttribute('id');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>
