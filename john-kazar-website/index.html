@@ -34,17 +34,25 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
   position:fixed;top:0;left:0;right:0;z-index:100;
   padding:20px 32px;
   display:flex;align-items:center;justify-content:space-between;
-  mix-blend-mode:difference;color:#fff;
-  transition:padding .4s var(--ease);
+  color:var(--ink);
+  transition:padding .4s var(--ease),background .4s var(--ease),box-shadow .4s var(--ease);
 }
-.topbar.compact{padding:14px 32px}
+.topbar.compact{
+  padding:14px 32px;
+  background:rgba(244,241,236,.92);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 rgba(0,0,0,.06);
+}
+/* On dark sections the nav gets a dark class via JS */
+.topbar.dark{color:var(--paper)}
+.topbar.dark.compact{background:rgba(13,13,13,.92);box-shadow:0 1px 0 rgba(255,255,255,.06)}
 .logo{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
 .logo b{color:var(--btc)}
 .nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;opacity:.7;transition:opacity .3s}
+.nav-links a{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;opacity:.65;transition:opacity .3s}
 .nav-links a:hover{opacity:1}
 .mob-toggle{display:none;width:28px;height:18px;flex-direction:column;justify-content:space-between}
-.mob-toggle span{height:1.5px;background:#fff;border-radius:1px;transition:.3s var(--ease)}
+.mob-toggle span{height:1.5px;background:currentColor;border-radius:1px;transition:.3s var(--ease)}
 .mob-toggle.on span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
 .mob-toggle.on span:nth-child(2){opacity:0}
 .mob-toggle.on span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
@@ -524,9 +532,22 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 <div class="toast" id="toast"></div>
 
 <script>
-// Nav
+// Nav — scroll compact + dark/light detection
 const tb=document.getElementById('topbar');
-window.addEventListener('scroll',()=>tb.classList.toggle('compact',scrollY>60));
+const darkSections=document.querySelectorAll('.services,.results,.marquee-wrap,.footer');
+function updateNav(){
+  tb.classList.toggle('compact',scrollY>60);
+  // Check if nav overlaps a dark section
+  const navBottom=tb.getBoundingClientRect().bottom;
+  let onDark=false;
+  darkSections.forEach(s=>{
+    const r=s.getBoundingClientRect();
+    if(r.top<navBottom&&r.bottom>0) onDark=true;
+  });
+  tb.classList.toggle('dark',onDark);
+}
+window.addEventListener('scroll',updateNav);
+updateNav();
 const mt=document.getElementById('mobToggle'),nl=document.getElementById('navLinks');
 mt.addEventListener('click',()=>{mt.classList.toggle('on');nl.classList.toggle('open')});
 nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mt.classList.remove('on');nl.classList.remove('open')}));
