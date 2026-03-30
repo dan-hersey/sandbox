@@ -45,17 +45,25 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 }
 /* On dark sections the nav gets a dark class via JS */
 .topbar.dark{color:var(--paper)}
+.topbar.mob-open{color:var(--paper)}
 .topbar.dark.compact{background:rgba(13,13,13,.92);box-shadow:0 1px 0 rgba(255,255,255,.06)}
 .logo{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
 .logo b{color:var(--btc)}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;opacity:.65;transition:opacity .3s}
 .nav-links a:hover{opacity:1}
-.mob-toggle{display:none;width:28px;height:18px;flex-direction:column;justify-content:space-between}
-.mob-toggle span{height:1.5px;background:currentColor;border-radius:1px;transition:.3s var(--ease)}
-.mob-toggle.on span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
+.mob-toggle{display:none;width:24px;height:14px;position:relative;z-index:102}
+.mob-toggle span{
+  position:absolute;left:0;width:100%;height:1.5px;
+  background:currentColor;border-radius:1px;
+  transition:transform .35s var(--ease),opacity .25s;
+}
+.mob-toggle span:nth-child(1){top:0}
+.mob-toggle span:nth-child(2){top:50%;transform:translateY(-50%)}
+.mob-toggle span:nth-child(3){bottom:0}
+.mob-toggle.on span:nth-child(1){top:50%;transform:translateY(-50%) rotate(45deg)}
 .mob-toggle.on span:nth-child(2){opacity:0}
-.mob-toggle.on span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mob-toggle.on span:nth-child(3){top:50%;transform:translateY(-50%) rotate(-45deg)}
 
 /* ─ HERO ─ */
 .hero{
@@ -296,14 +304,25 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
   .form-row{flex-direction:column}
   .footer{flex-direction:column;gap:16px;text-align:center;padding:28px}
   .nav-links{
-    display:none;position:fixed;inset:0;
-    background:rgba(13,13,13,.96);
-    flex-direction:column;align-items:center;justify-content:center;
-    gap:28px;z-index:99;
+    position:fixed;top:0;left:0;right:0;
+    background:var(--ink);
+    flex-direction:column;align-items:flex-start;
+    padding:72px 28px 32px;gap:6px;
+    z-index:101;
+    transform:translateY(-100%);
+    transition:transform .45s var(--ease);
+    pointer-events:none;
+    border-bottom:1px solid rgba(255,255,255,.08);
   }
-  .nav-links.open{display:flex}
-  .nav-links a{font-size:1.1rem;opacity:1}
-  .mob-toggle{display:flex}
+  .nav-links.open{transform:translateY(0);pointer-events:auto}
+  .nav-links a{
+    font-size:1rem;opacity:1;color:var(--paper);
+    padding:12px 0;width:100%;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .nav-links li:last-child a{border-bottom:none}
+  .mob-toggle{display:block}
+  .topbar{z-index:102}
   .marquee-track span{font-size:.9rem;padding:0 24px}
 }
 </style>
@@ -549,8 +568,19 @@ function updateNav(){
 window.addEventListener('scroll',updateNav);
 updateNav();
 const mt=document.getElementById('mobToggle'),nl=document.getElementById('navLinks');
-mt.addEventListener('click',()=>{mt.classList.toggle('on');nl.classList.toggle('open')});
-nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mt.classList.remove('on');nl.classList.remove('open')}));
+function toggleMob(){
+  const opening=!nl.classList.contains('open');
+  mt.classList.toggle('on',opening);
+  nl.classList.toggle('open',opening);
+  // Force light text when menu is open (dark panel behind)
+  tb.classList.toggle('mob-open',opening);
+  document.body.style.overflow=opening?'hidden':'';
+}
+mt.addEventListener('click',toggleMob);
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  mt.classList.remove('on');nl.classList.remove('open');
+  tb.classList.remove('mob-open');document.body.style.overflow='';
+}));
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
